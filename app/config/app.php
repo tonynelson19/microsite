@@ -113,6 +113,7 @@ return array(
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
+        'Former\FormerServiceProvider',
 
 	),
 
@@ -157,6 +158,7 @@ return array(
 		'Event'           => 'Illuminate\Support\Facades\Event',
 		'File'            => 'Illuminate\Support\Facades\File',
 		'Form'            => 'Illuminate\Support\Facades\Form',
+        'Former'          => 'Former\Facades\Former',
 		'Hash'            => 'Illuminate\Support\Facades\Hash',
 		'HTML'            => 'Illuminate\Support\Facades\HTML',
 		'Input'           => 'Illuminate\Support\Facades\Input',

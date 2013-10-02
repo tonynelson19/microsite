@@ -10,5 +10,6 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
+Route::any('/admin', array('as' => 'admin.index', 'uses' => 'AdminController@indexAction'));
 
 Route::any('/', array('as' => 'index.index', 'uses' => 'IndexController@indexAction'));
