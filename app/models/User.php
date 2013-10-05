@@ -2,20 +2,16 @@
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 /**
- * Class User
+ * User model
  *
  * @property int $id
  * @property string $username
  * @property string $password
  * @property string $salt
- *
  */
 class User extends Eloquent
 {
-	/**
-	 * The database table used by the model.
-	 *
-	 * @var string
-	 */
 	protected $table = 'users';
+
+    public $timestamps = false;
 }

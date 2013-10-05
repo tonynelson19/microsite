@@ -10,6 +10,28 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
-Route::any('/admin', array('as' => 'admin.index', 'uses' => 'AdminController@indexAction'));
 
-Route::any('/', array('as' => 'index.index', 'uses' => 'IndexController@indexAction'));
+Route::any('/', array(
+    'as'   => 'index.index',
+    'uses' => 'IndexController@indexAction',
+));
+
+Route::any('/sections', array(
+    'as'   => 'index.sections',
+    'uses' => 'IndexController@sectionsAction',
+));
+
+Route::any('/section/{id}', array(
+    'as'   => 'index.section',
+    'uses' => 'IndexController@sectionAction',
+));
+
+Route::any('/product/{id}', array(
+    'as'   => 'index.product',
+    'uses' => 'IndexController@productAction',
+));
+
+Route::any('/admin', array(
+    'as'   => 'admin.index',
+    'uses' => 'AdminController@indexAction',
+));
