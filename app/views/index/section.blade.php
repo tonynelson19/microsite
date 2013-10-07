@@ -4,8 +4,8 @@
 
     <div class="header">
         <div class="logo">
-            <a class="back" href="{{ URL::route('index.sections') }}"><img src="{{ URL::asset('img/arrow-icon.png') }}" /></a>
-            <a class="home" href="{{ URL::route('index.sections') }}"><img src="{{ URL::asset('img/QA1_Logo.png') }}" /></a>
+            <a class="back" href="{{ URL::route('index.index') }}"><img src="{{ URL::asset('img/arrow-icon.png') }}" /></a>
+            <a class="home" href="{{ URL::route('index.index') }}"><img src="{{ URL::asset('img/QA1_Logo.png') }}" /></a>
             <a class="menu" href="#"><img src="{{ URL::asset('img/menu-icon.png') }}" /></a>
         </div>
     </div>

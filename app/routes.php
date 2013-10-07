@@ -16,11 +16,6 @@ Route::any('/', array(
     'uses' => 'IndexController@indexAction',
 ));
 
-Route::any('/sections', array(
-    'as'   => 'index.sections',
-    'uses' => 'IndexController@sectionsAction',
-));
-
 Route::any('/section/{id}', array(
     'as'   => 'index.section',
     'uses' => 'IndexController@sectionAction',

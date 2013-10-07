@@ -3,14 +3,9 @@ class IndexController extends BaseController
 {
     public function indexAction()
 	{
-        return View::make('index.index');
-	}
-
-    public function sectionsAction()
-    {
         $sections = Section::orderBy('order', 'asc')->get();
 
-        return View::make('index.sections', array(
+        return View::make('index.index', array(
             'sections' => $sections,
         ));
     }
