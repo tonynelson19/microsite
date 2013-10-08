@@ -14,15 +14,15 @@
             <div class="row">
                 <div class="col-md-4">
                     <div id="carousel" class="carousel slide">
-                        @if (count($product->images()))
+                        @if (count($images))
                             <ol class="carousel-indicators">
-                                @foreach ($product->images() as $index => $image)
+                                @foreach ($images as $index => $image)
                                     <li data-target="#carousel" data-slide-to="{{ $index }}" @if ($index === 0)class="active"@endif></li>
                                 @endforeach
                             </ol>
                         @endif
                         <div class="carousel-inner">
-                            @foreach ($product->images() as $index => $image)
+                            @foreach ($images as $index => $image)
                                 <div class="item @if ($index === 0) active @endif">
                                     <span class="image">
                                         <img src="{{ $image->imageUrl }}" />
@@ -35,7 +35,7 @@
                                 </div>
                             @endforeach
                         </div>
-                        @if (count($product->images()))
+                        @if (count($images))
                             <a class="left carousel-control" href="#carousel" data-slide="prev">
                                 <span class="icon-prev"></span>
                             </a>

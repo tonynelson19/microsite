@@ -7,9 +7,10 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
  * @property int $id
  * @property int $categoryId
  * @property string $name
- * @property string $image
- * @property string $video
+ * @property string $imageUrl
+ * @property string $videoUrl
  * @property string $description
+ * @property string $status
  * @property int $order
  */
 class Product extends Eloquent
@@ -18,17 +19,23 @@ class Product extends Eloquent
 
     public $timestamps = false;
 
+    const STATUS_ACTIVE   = 'active';
+    const STATUS_INACTIVE = 'inactive';
+
     /**
-     * Images
+     * Statuses
      *
-     * @var Image[]
+     * @var array
      */
-    protected $images;
+    public static $statuses = array(
+        self::STATUS_ACTIVE   => 'Active',
+        self::STATUS_INACTIVE => 'Inactive',
+    );
 
     /**
      * Get the category associated with the product
      *
-     * @return Category
+     * @return Illuminate\Database\Eloquent\Builder
      */
     public function category()
     {
@@ -36,15 +43,34 @@ class Product extends Eloquent
     }
 
     /**
-     * Find all images for the product
+     * Get the images associated with the product
      *
-     * @return Image[]
+     * @return Illuminate\Database\Eloquent\Builder
      */
     public function images()
     {
-        if (is_null($this->images)) {
-            $this->images = Image::where('productId', '=', $this->id)->orderBy('order', 'asc')->get();
-        }
-        return $this->images;
+        return $this->hasMany('Image', 'productId');
+    }
+
+    /**
+     * Only active records
+     *
+     * @param Illuminate\Database\Eloquent\Builder $query
+     * @return Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeActive($query)
+    {
+        return $query->where('status', '=', self::STATUS_ACTIVE);
+    }
+
+    /**
+     * Order the records
+     *
+     * @param Illuminate\Database\Eloquent\Builder $query
+     * @return Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOrdered($query)
+    {
+        return $query->orderBy('order', 'asc');
     }
 }

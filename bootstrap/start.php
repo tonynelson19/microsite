@@ -28,9 +28,6 @@ $app->redirectIfTrailingSlash();
 
 $env = $app->detectEnvironment(
     function() {
-
-
-
         return getenv('ENVIRONMENT') ?: 'production';
     }
 );

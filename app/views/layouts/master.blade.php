@@ -10,10 +10,10 @@
         {{ HTML::script('js/bootstrap.min.js') }}
         {{ HTML::script('js/hammer.min.js') }}
         {{ HTML::script('js/main.js') }}
-
-        <script src="<?php echo asset('js/jquery-1.10.2.min.js'); ?>"></script>
     </head>
     <body>
-        @yield('content')
+        <div class="wrapper">
+            @yield('content')
+        </div>
     </body>
 </html>

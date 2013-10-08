@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
  *
  * @property int $id
  * @property string $name
- * @property string $image
+ * @property string $imageUrl
+ * @property string $status
  * @property int $order
  */
 class Section extends Eloquent
@@ -15,23 +16,48 @@ class Section extends Eloquent
 
     public $timestamps = false;
 
-    /**
-     * Categories
-     *
-     * @var Category[]
-     */
-    protected $categories;
+    const STATUS_ACTIVE   = 'active';
+    const STATUS_INACTIVE = 'inactive';
 
     /**
-     * Find all categories for the section
+     * Statuses
      *
-     * @return Category[]
+     * @var array
+     */
+    public static $statuses = array(
+        self::STATUS_ACTIVE   => 'Active',
+        self::STATUS_INACTIVE => 'Inactive',
+    );
+
+    /**
+     * Get the categories associated with the section
+     *
+     * @return Illuminate\Database\Eloquent\Builder
      */
     public function categories()
     {
-        if (is_null($this->categories)) {
-            $this->categories = Category::where('sectionId', '=', $this->id)->orderBy('order', 'asc')->get();
-        }
-        return $this->categories;
+        return $this->hasMany('Category', 'sectionId');
+    }
+
+    /**
+     * Only active records
+     *
+     * @param Illuminate\Database\Eloquent\Builder $query
+     * @return Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeActive($query)
+    {
+        return $query->where('status', '=', self::STATUS_ACTIVE);
+    }
+
+    /**
+     * Order the records
+     *
+     * @param Illuminate\Database\Eloquent\Builder $query
+     * @return Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOrdered($query)
+    {
+        return $query->orderBy('order', 'asc');
     }
 }

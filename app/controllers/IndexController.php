@@ -2,8 +2,8 @@
 class IndexController extends BaseController
 {
     public function indexAction()
-	{
-        $sections = Section::orderBy('order', 'asc')->get();
+    {
+        $sections = Section::active()->ordered()->get();
 
         return View::make('index.index', array(
             'sections' => $sections,
@@ -12,19 +12,32 @@ class IndexController extends BaseController
 
     public function sectionAction($id)
     {
-        $section = Section::find($id);
+        /** @var Section $section */
+        $section = Section::findOrFail($id);
+
+        $categories = $section->categories()->active()->ordered()->get();
+
+        $products = array();
+        foreach ($categories as $category) {
+            $products[$category->id] = $category->products()->active()->ordered()->get();
+        }
 
         return View::make('index.section', array(
-            'section' => $section,
+            'section'    => $section,
+            'categories' => $categories,
+            'products'   => $products,
         ));
     }
 
     public function productAction($id)
     {
-        $product = Product::find($id);
+        $product = Product::findOrFail($id);
+
+        $images = $product->images()->active()->ordered()->get();
 
         return View::make('index.product', array(
-           'product' => $product,
+            'product' => $product,
+            'images' => $images,
         ));
     }
 }

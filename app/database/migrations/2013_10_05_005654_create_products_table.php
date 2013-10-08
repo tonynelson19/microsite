@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration {
             $table->string('imageUrl', 2000);
             $table->string('videoUrl', 200)->nullable();
             $table->text('description');
+            $table->string('status', 50)->nullable();
             $table->integer('order');
 		});
 	}

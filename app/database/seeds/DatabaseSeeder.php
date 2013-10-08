@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder {
             $section = Section::create(array(
                  'name'     => 'Section ' . $i,
                  'imageUrl' => 'http://placekitten.com/224/130',
+                 'status'   => Section::STATUS_ACTIVE,
                  'order'    => $i,
             ));
 
@@ -31,6 +32,7 @@ class DatabaseSeeder extends Seeder {
                 $category = Category::create(array(
                     'sectionId' => $section->id,
                     'name'      => 'Category ' . $i . '.' . $j,
+                    'status'    => Category::STATUS_ACTIVE,
                     'order'     => $j,
                 ));
 
@@ -42,6 +44,7 @@ class DatabaseSeeder extends Seeder {
                         'name'        => 'Product ' . $i . '.' . $j . '.' . $k,
                         'imageUrl'    => 'http://placekitten.com/62/62',
                         'description' => '<p>Beef ribs consequat chicken adipisicing ut nostrud ut andouille leberkas in bacon. Ball tip occaecat sint consectetur nisi tempor jowl enim chuck shoulder leberkas shankle fatback turducken. Sausage pork loin kevin filet mignon sint boudin enim ad short loin qui est velit pancetta. Fatback chuck adipisicing pariatur quis rump t-bone consequat aliqua nulla pork tongue sunt laborum.</p><p>In capicola boudin nulla pork loin quis. Strip steak laborum in elit. Ribeye cupidatat in in pig cow shoulder laborum velit beef ribs, pork chop corned beef jerky magna laboris. Ground round dolore sausage cillum tongue. Quis excepteur pig id, turducken culpa laboris frankfurter. Nostrud sausage deserunt enim est biltong, kevin capicola leberkas pig brisket laborum boudin. Kielbasa shoulder aliquip mollit irure.</p>',
+                        'status'      => Product::STATUS_ACTIVE,
                         'order'       => $j,
                     ));
 
@@ -52,6 +55,7 @@ class DatabaseSeeder extends Seeder {
                             'productId' => $product->id,
                             'imageUrl'  => 'http://placekitten.com/350/550',
                             'caption'   => 'Image ' . $i . '.' . $j . '.' . $k . '.' . $l,
+                            'status'    => Image::STATUS_ACTIVE,
                             'order'     => $l,
                         ));
 

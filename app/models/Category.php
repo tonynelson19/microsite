@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
  * @property int $id
  * @property int $sectionId
  * @property string $name
+ * @property string $status
  * @property int $order
  */
 class Category extends Eloquent
@@ -15,17 +16,23 @@ class Category extends Eloquent
 
     public $timestamps = false;
 
+    const STATUS_ACTIVE   = 'active';
+    const STATUS_INACTIVE = 'inactive';
+
     /**
-     * Products
+     * Statuses
      *
-     * @var Product[]
+     * @var array
      */
-    protected $products;
+    public static $statuses = array(
+        self::STATUS_ACTIVE   => 'Active',
+        self::STATUS_INACTIVE => 'Inactive',
+    );
 
     /**
      * Get the section associated with the category
      *
-     * @return Section
+     * @return Illuminate\Database\Eloquent\Builder
      */
     public function section()
     {
@@ -33,15 +40,34 @@ class Category extends Eloquent
     }
 
     /**
-     * Find all products for the category
+     * Get the products associated with the category
      *
-     * @return Product[]
+     * @return Illuminate\Database\Eloquent\Builder
      */
     public function products()
     {
-        if (is_null($this->products)) {
-            $this->products = Product::where('categoryId', '=', $this->id)->orderBy('order', 'asc')->get();
-        }
-        return $this->products;
+        return $this->hasMany('Product', 'categoryId');
+    }
+
+    /**
+     * Only active records
+     *
+     * @param Illuminate\Database\Eloquent\Builder $query
+     * @return Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeActive($query)
+    {
+        return $query->where('status', '=', self::STATUS_ACTIVE);
+    }
+
+    /**
+     * Order the records
+     *
+     * @param Illuminate\Database\Eloquent\Builder $query
+     * @return Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOrdered($query)
+    {
+        return $query->orderBy('order', 'asc');
     }
 }

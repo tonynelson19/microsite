@@ -17,6 +17,7 @@ class CreateCategoriesTable extends Migration {
 			$table->increments('id');
             $table->integer('sectionId');
             $table->string('name', 200);
+            $table->string('status', 50)->nullable();
             $table->integer('order');
 		});
 	}

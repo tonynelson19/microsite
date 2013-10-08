@@ -12,11 +12,11 @@
     <div class="content">
         <div class="container section">
             <ul class="categories">
-                @foreach ($section->categories() as $category)
+                @foreach ($categories as $category)
                     <li>
                         <h2>{{ $category->name }}</h2>
                         <ul>
-                            @foreach ($category->products() as $product)
+                            @foreach ($products[$category->id] as $product)
                                 <li>
                                     <a href="{{ URL::route('index.product', array('id' => $product->id)) }}">
                                         <span class="image">

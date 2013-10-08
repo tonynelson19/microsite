@@ -18,6 +18,7 @@ class CreateImagesTable extends Migration {
             $table->integer('productId');
             $table->string('imageUrl', 2000);
             $table->string('caption', 200)->nullable();
+            $table->string('status', 50)->nullable();
             $table->integer('order');
 		});
 	}
