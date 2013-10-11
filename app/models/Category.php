@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
  * Category model
  *
  * @property int $id
+ * @property Section $section
  * @property int $sectionId
  * @property string $name
  * @property string $status
@@ -16,8 +17,8 @@ class Category extends Eloquent
 
     public $timestamps = false;
 
-    const STATUS_ACTIVE   = 'active';
-    const STATUS_INACTIVE = 'inactive';
+    const STATUS_ACTIVE   = 'Active';
+    const STATUS_INACTIVE = 'Inactive';
 
     /**
      * Statuses

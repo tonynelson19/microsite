@@ -16,8 +16,8 @@ class Section extends Eloquent
 
     public $timestamps = false;
 
-    const STATUS_ACTIVE   = 'active';
-    const STATUS_INACTIVE = 'inactive';
+    const STATUS_ACTIVE   = 'Active';
+    const STATUS_INACTIVE = 'Inactive';
 
     /**
      * Statuses

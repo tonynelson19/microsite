@@ -2,14 +2,15 @@
 
 @section('content')
 
-    {{ Former::horizontal_open() }}
+    <div class="container login col-lg-4 col-lg-offset-4">
 
-        {{ Former::text('username') }}
+        <h1>Login</h1>
+        {{ Former::horizontal_open() }}
+            {{ Former::text('username') }}
+            {{ Former::password('password') }}
+            {{ Former::actions()->primary_submit('Submit') }}
+        {{ Former::close() }}
 
-        {{ Former::password('password') }}
-
-        {{ Former::actions()->large_primary_submit('Submit') }}
-
-    {{ Former::close() }}
+    </div>
 
 @stop
