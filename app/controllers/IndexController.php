@@ -22,22 +22,29 @@ class IndexController extends BaseController
             $products[$category->id] = $category->products()->active()->ordered()->get();
         }
 
+        $sections = Section::active()->ordered()->get();
+
         return View::make('index.section', array(
             'section'    => $section,
             'categories' => $categories,
             'products'   => $products,
+            'sections'   => $sections,
         ));
     }
 
     public function productAction($id)
     {
+        /** @var Product $product */
         $product = Product::findOrFail($id);
 
         $images = $product->images()->active()->ordered()->get();
 
+        $products = $product->category->products()->active()->ordered()->get();
+
         return View::make('index.product', array(
-            'product' => $product,
-            'images' => $images,
+            'product'  => $product,
+            'images'   => $images,
+            'products' => $products,
         ));
     }
 }

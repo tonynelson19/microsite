@@ -26,19 +26,50 @@ body {
 }
 
 .logo .back {
-    /* border-right: 1px solid #fff; */
-    margin-right: 10px;
+    border-right: 1px solid #fff;
+    margin-right: 20px;
     padding-right: 10px;
 }
 
 .logo .menu {
-    /* border-left: 1px solid #fff; */
-    margin-left: 10px;
+    border-left: 1px solid #fff;
+    margin-left: 20px;
     padding-left: 10px;
 }
 
-.logo .menu img {
-    display: none;
+.logo .menu-options {
+    position: relative;
+    display: inline-block;
+    width: 0;
+    top: 13px;
+    left: -291px;
+    z-index: 2;
+}
+
+.logo .menu-options ul {
+    position: absolute;
+    width: 300px;
+    padding: 0;
+    border: 1px solid #fff;
+    border-bottom: 0;
+}
+
+.logo .menu-options li {
+    list-style-type: none;
+    border-bottom: 1px solid #fff;
+}
+
+.logo .menu-options a {
+    display: block;
+    text-align: left;
+    padding: 10px 15px;
+    background-color: #e00;
+    color: #fff;
+}
+
+.logo .menu-options a:hover {
+    background-color: red;
+    text-decoration: none;
 }
 
 .container.index h1 {

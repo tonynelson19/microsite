@@ -39,10 +39,35 @@ $(function() {
                 return a;
             }
 
+        },
+
+        Menu: {
+
+            init: function() {
+
+                $(document).on('click', function(e) {
+
+                    var target = $(e.target);
+                    if (!target.is('.menu-options') && !target.closest('.menu-options').length) {
+                        $('.menu-options ul').hide();
+                    }
+
+                });
+
+                $(document).on('click', '.menu', function(e) {
+                    e.preventDefault();
+                    var options = $('.menu-options ul');
+                    options.toggle();
+                    return false;
+                });
+
+            }
+
         }
 
     }
 
     APP.Links.init();
+    APP.Menu.init();
 
 });

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
  *
  * @property int $id
  * @property int $productId
+ * @property Product product
  * @property string $caption
  * @property string $imageUrl
  * @property string $status
