@@ -6,6 +6,6 @@ return array(
     'files' => storage_path() . '/sessions',
     'lottery' => array(2, 100),
     'cookie' => 'laravel_session',
-    'path' => '/microsite/',
+    'path' => '/',
     'domain' => null,
 );

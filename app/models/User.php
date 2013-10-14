@@ -17,7 +17,7 @@ class User extends Eloquent implements Illuminate\Auth\UserInterface
 
     public function getAuthIdentifier()
     {
-        return $this->username;
+        return $this->getKey();
     }
 
     public function getAuthPassword()

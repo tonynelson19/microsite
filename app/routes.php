@@ -32,6 +32,11 @@ Route::any('/admin', array(
     'before' => 'admin',
 ));
 
+Route::any('/admin/logout', array(
+    'as'   => 'admin.logout',
+    'uses' => 'AdminController@logoutAction',
+));
+
 Route::any('/admin/section/list', array(
     'as'     => 'admin.list-sections',
     'uses'   => 'AdminController@listSectionsAction',

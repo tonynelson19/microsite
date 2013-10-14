@@ -12,6 +12,9 @@
         {{ HTML::script('js/admin.js') }}
     </head>
     <body>
+        @if (Auth::user())
+            <a href="{{ URL::route('admin.logout') }}" class="logout">Logout</a>
+        @endif
         @yield('content')
     </body>
 </html>

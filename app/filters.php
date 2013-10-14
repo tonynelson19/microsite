@@ -24,7 +24,7 @@ App::after(function($request, $response)
 
 Route::filter('auth', function() {
     if (Auth::guest()) {
-        // return Redirect::route('admin.index');
+        return Redirect::route('admin.index');
     }
 });
 

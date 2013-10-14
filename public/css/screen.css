@@ -300,6 +300,12 @@ body {
     padding-top: 160px;
 }
 
+.logout {
+    position: absolute;
+    top: 8px;
+    right: 20px;
+}
+
 .table .thumbnail {
     height: 46px;
     width: 46px;

@@ -39,6 +39,13 @@ class AdminController extends BaseController
         return View::make('admin.index');
 	}
 
+    public function logoutAction()
+    {
+        Auth::logout();
+
+        return Redirect::route('admin.index');
+    }
+
     public function listSectionsAction()
     {
         $sections = Section::ordered()->get();
