@@ -74,4 +74,19 @@ class Product extends Eloquent
     {
         return $query->orderBy('order', 'asc');
     }
+
+    /**
+     * Get the video ID
+     *
+     * @param string $url
+     * @return string|null
+     */
+    public static function getVideoId($url)
+    {
+        if (preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $url, $match)) {
+            return $match[1];
+        }
+
+        return null;
+    }
 }

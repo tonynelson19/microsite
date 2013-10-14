@@ -54,6 +54,9 @@
                 </div>
                 <div class="col-md-8">
                     <h1>{{ $product->name }}</h1>
+                    @if ($product->videoUrl)
+                        <a class="video" data-toggle="modal" data-target="#video" href="#video"><img src="{{ URL::asset('img/video-icon.png') }}" /></a>
+                    @endif
                     <h2>{{ $product->category->name }}</h2>
                     <div class="description">
                         {{ $product->description }}
@@ -62,5 +65,20 @@
             </div>
         </div>
     </div>
+    @if ($product->videoUrl)
+        <div class="modal fade" id="video" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">{{ $product->name }}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <iframe width="540" height="405" src="//www.youtube.com/embed/{{ Product::getVideoId($product->videoUrl) }}?wmode=transparent" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
 
 @stop

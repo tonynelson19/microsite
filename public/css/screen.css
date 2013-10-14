@@ -22,7 +22,7 @@ body {
     width: 50px;
     height: 38px;
     display: inline-block;
-    padding-top: 8px;
+    padding-top: 13px;
 }
 
 .logo .back {
@@ -37,12 +37,18 @@ body {
     padding-left: 10px;
 }
 
+.logo .back img,
+.logo .menu img {
+    position: relative;
+    top: -4px;
+}
+
 .logo .menu-options {
     position: relative;
     display: inline-block;
     width: 0;
-    top: 13px;
-    left: -291px;
+    top: 10px;
+    left: -54px;
     z-index: 2;
 }
 
@@ -63,12 +69,12 @@ body {
     display: block;
     text-align: left;
     padding: 10px 15px;
-    background-color: #e00;
+    background-color: #e70203;
     color: #fff;
 }
 
 .logo .menu-options a:hover {
-    background-color: red;
+    background-color: #ff0000;
     text-decoration: none;
 }
 
@@ -284,6 +290,16 @@ body {
     text-transform: uppercase;
     font-size: 42px;
     font-weight: bold;
+}
+
+.container.product h1 {
+    display: inline;
+}
+
+.container.product .video {
+    position: relative;
+    top: -12px;
+    left: 12px;
 }
 
 .container.product h2 {

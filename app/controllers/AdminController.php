@@ -359,9 +359,21 @@ class AdminController extends BaseController
 
             $product->order       = Input::get('order');
             $product->name        = Input::get('name');
-            $product->videoUrl    = Input::get('videoUrl');
             $product->description = Input::get('description');
             $product->status      = Input::get('status');
+
+            $videoUrl = Input::get('videoUrl');
+
+            if ($videoUrl != '') {
+                $videoId = Product::getVideoId($videoUrl);
+                if ($videoId) {
+                    $videoUrl = 'http://youtu.be/' . $videoId;
+                } else {
+                    $videoUrl = '';
+                }
+            }
+
+            $product->videoUrl = $videoUrl;
 
             if (Input::hasFile('image')) {
                 $product->imageUrl = $this->processUpload(Input::file('image'));
