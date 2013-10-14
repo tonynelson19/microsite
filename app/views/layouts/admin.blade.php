@@ -7,6 +7,8 @@
         {{ HTML::style('css/screen.css') }}
         {{ HTML::script('js/jquery-1.10.2.min.js') }}
         {{ HTML::script('js/bootstrap.min.js') }}
+        {{ HTML::script('plugins/ckeditor/ckeditor.js') }}
+        {{ HTML::script('plugins/ckeditor/adapters/jquery.js') }}
         {{ HTML::script('js/admin.js') }}
     </head>
     <body>

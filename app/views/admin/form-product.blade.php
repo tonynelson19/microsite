@@ -7,7 +7,7 @@
         {{ Former::file('image') }}
     @endif
     {{ Former::text('videoUrl')->label('Video URL')->value($product->videoUrl) }}
-    {{ Former::textarea('description')->value($product->description)->rows(8) }}
+    {{ Former::textarea('description')->value($product->description)->rows(8)->class('js-editor') }}
     {{ Former::select('status')->value($product->status)->options(Product::$statuses) }}
     {{ Former::actions()->primary_submit('Submit') }}
 {{ Former::close() }}

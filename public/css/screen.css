@@ -327,6 +327,10 @@ body {
     border: inherit;
 }
 
+.table input[type="text"] {
+    width: 100%;
+}
+
 .form-horizontal .thumbnail {
     height: 120px;
     width: 120px;
