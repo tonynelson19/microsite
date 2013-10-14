@@ -16,7 +16,7 @@ class FormerServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->app->bind('former.framework', function($app) {
-            return new Framework($this->app);
+            return new Framework($app);
         });
     }
 }
