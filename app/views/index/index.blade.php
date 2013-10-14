@@ -4,7 +4,7 @@
 
     <div class="header">
         <div class="logo">
-            <a class="home" href="{{ URL::route('index.index') }}"><img src="{{ URL::asset('img/QA1_Logo.png') }}" /></a>
+            <a class="home" href="{{ URL::route('index.index') }}"><img src="{{ URL::asset('img/QA1-Logo.png') }}" /></a>
         </div>
     </div>
     <div class="content">
