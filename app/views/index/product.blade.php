@@ -69,12 +69,8 @@
         <div class="modal fade" id="video" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">{{ $product->name }}</h4>
-                    </div>
                     <div class="modal-body">
-                        <iframe width="540" height="405" src="//www.youtube.com/embed/{{ Product::getVideoId($product->videoUrl) }}?wmode=transparent" frameborder="0" allowfullscreen></iframe>
+                        <iframe width="560" height="415" src="//www.youtube.com/embed/{{ Product::getVideoId($product->videoUrl) }}?wmode=transparent&html5=1" frameborder="0" allowfullscreen></iframe>
                     </div>
                 </div>
             </div>

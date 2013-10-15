@@ -63,11 +63,35 @@ $(function() {
 
             }
 
+        },
+
+        Modals: {
+
+            init: function() {
+
+                var self = this;
+
+                $(document).on('show.bs.modal', '.modal', function() {
+                    self.reloadIframe();
+                });
+
+                $(document).on('hide.bs.modal', '.modal', function() {
+                    self.reloadIframe();
+                });
+
+            },
+
+            reloadIframe: function() {
+                var iframe = $('.modal iframe');
+                iframe.attr('src', iframe.attr('src'));
+            }
+
         }
 
     }
 
     APP.Links.init();
     APP.Menu.init();
+    APP.Modals.init();
 
 });
