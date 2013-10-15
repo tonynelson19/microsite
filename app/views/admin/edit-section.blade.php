@@ -15,6 +15,7 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
+                    <th width="1%">Order</th>
                     <th>Name</th>
                     <th>Status</th>
                     <th>Products</th>
@@ -24,6 +25,7 @@
             <tbody>
                 @foreach ($categories as $category)
                     <tr>
+                        <td>{{ $category->order }}</td>
                         <td>{{ Util::clean($category->name) }}</td>
                         <td>{{ $category->status }}</td>
                         <td>{{ count($category->products) }}</td>
@@ -37,7 +39,7 @@
                 @endforeach
                 @if (count($categories) == 0)
                     <tr>
-                        <td colspan="4">None</td>
+                        <td colspan="5">None</td>
                     </tr>
                 @endif
             </tbody>

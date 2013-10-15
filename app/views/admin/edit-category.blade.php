@@ -16,7 +16,7 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>Order</th>
+                    <th width="1%">Order</th>
                     <th>Name</th>
                     <th>Status</th>
                     <th>Image</th>
