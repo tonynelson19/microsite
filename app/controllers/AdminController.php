@@ -274,10 +274,6 @@ class AdminController extends BaseController
             'name'  => 'required',
         );
 
-        if (!$section->id) {
-            $rules['image'] = 'required';
-        }
-
         /** @var Illuminate\Validation\Validator $validator */
         $validator = Validator::make(Input::all(), $rules);
 
@@ -287,8 +283,10 @@ class AdminController extends BaseController
             $section->name   = Input::get('name');
             $section->status = Input::get('status');
 
-            if (Input::hasFile('image')) {
-                $section->imageUrl = $this->processUpload(Input::file('image'));
+            if (Input::hasFile('imageUpload')) {
+                $section->imageUrl = $this->processUpload(Input::file('imageUpload'));
+            } else {
+                $section->imageUrl = Input::get('imageUrl');
             }
 
             $section->save();
@@ -375,8 +373,10 @@ class AdminController extends BaseController
 
             $product->videoUrl = $videoUrl;
 
-            if (Input::hasFile('image')) {
-                $product->imageUrl = $this->processUpload(Input::file('image'));
+            if (Input::hasFile('imageUpload')) {
+                $product->imageUrl = $this->processUpload(Input::file('imageUpload'));
+            } else {
+                $product->imageUrl = Input::get('imageUrl');
             }
 
             $category->products()->save($product);

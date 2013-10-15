@@ -1,10 +1,15 @@
 {{ Former::horizontal_open_for_files() }}
     {{ Former::text('order')->value($product->order) }}
     {{ Former::text('name')->value($product->name) }}
+    {{ Former::file('imageUpload')->label('Thumbnail Upload') }}
+    {{ Former::text('imageUrl')->label('Thumbnail URL')->value($product->imageUrl) }}
     @if ($product->imageUrl)
-        {{ Former::file('image')->label('Thumbnail Image')->help('<div class="thumbnail"><img src="' . $product->imageUrl . '" /></div>') }}
-    @else
-        {{ Former::file('image')->label('Thumbnail Image') }}
+        <div class="form-group">
+            <label for="name" class="col-lg-2 control-label">Current Thumbnail</label>
+            <div class="col-lg-10 controls">
+                <div class="thumbnail"><img src="{{ $product->imageUrl }}" /></div>
+            </div>
+        </div>
     @endif
     {{ Former::text('videoUrl')->label('Video URL')->value($product->videoUrl) }}
     @if ($product->videoUrl)

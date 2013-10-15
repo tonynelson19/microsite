@@ -57,7 +57,6 @@
                     @if ($product->videoUrl)
                         <a class="video" data-toggle="modal" data-target="#video" href="#video"><img src="{{ URL::asset('img/video-icon.png') }}" /></a>
                     @endif
-                    <h2>{{ $product->category->name }}</h2>
                     <div class="description">
                         {{ $product->description }}
                     </div>
