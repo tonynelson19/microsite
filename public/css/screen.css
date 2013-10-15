@@ -54,7 +54,7 @@ body {
 
 .logo .menu-options ul {
     position: absolute;
-    width: 300px;
+    width: 375px;
     padding: 0;
     border: 1px solid #fff;
     border-bottom: 0;
@@ -71,6 +71,7 @@ body {
     padding: 10px 15px;
     background-color: #e70203;
     color: #fff;
+    font-weight: bold;
 }
 
 .logo .menu-options a:hover {
