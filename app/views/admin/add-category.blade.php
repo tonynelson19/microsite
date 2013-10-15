@@ -4,7 +4,7 @@
 
     <ol class="breadcrumb">
         <li><a href="{{ URL::route('admin.list-sections') }} ">Sections</a></li>
-        <li><a href="{{ URL::route('admin.edit-section', array('id' => $section->id)) }}">{{ $section->name }}</a></li>
+        <li><a href="{{ URL::route('admin.edit-section', array('id' => $section->id)) }}">{{ Util::clean($section->name) }}</a></li>
         <li class="active">New Category</a></li>
     </ol>
 

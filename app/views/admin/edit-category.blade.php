@@ -4,12 +4,12 @@
 
     <ol class="breadcrumb">
         <li><a href="{{ URL::route('admin.list-sections') }} ">Sections</a></li>
-        <li><a href="{{ URL::route('admin.edit-section', array('id' => $section->id)) }}">{{ $section->name }}</a></li>
-        <li class="active">{{ $category->name }}</a></li>
+        <li><a href="{{ URL::route('admin.edit-section', array('id' => $section->id)) }}">{{ Util::clean($section->name) }}</a></li>
+        <li class="active">{{ Util::clean($category->name) }}</a></li>
     </ol>
 
     <div class="container">
-        <h1>{{ $category->name }}</h1>
+        <h1>{{ Util::clean($category->name) }}</h1>
         {{ View::make('admin.form-category', array('category' => $category)) }}
         <a class="btn btn-danger" href="{{ URL::route('admin.delete-category', array('id' => $category->id)) }}" data-confirm="Are you sure you want to delete this category?">Delete</a>
         <h2>Products</h2>
@@ -28,7 +28,7 @@
                 @foreach ($products as $product)
                     <tr>
                         <td>{{ $product->order }}</td>
-                        <td>{{ $product->name }}</td>
+                        <td>{{ Util::clean($product->name) }}</td>
                         <td>{{ $product->status }}</td>
                         <td><div class="thumbnail"><img src="{{ $product->imageUrl }}" /></div></td>
                         <td>{{ count($product->images) }}</td>

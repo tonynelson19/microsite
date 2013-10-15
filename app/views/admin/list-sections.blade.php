@@ -23,7 +23,7 @@
                 @foreach ($sections as $section)
                     <tr>
                         <td>{{ $section->order }}</td>
-                        <td>{{ $section->name }}</td>
+                        <td>{{ Util::clean($section->name) }}</td>
                         <td><div class="thumbnail"><img src="{{ $section->imageUrl }}" /></div></td>
                         <td>{{ $section->status }}</td>
                         <td>{{ count($section->categories) }}</td>

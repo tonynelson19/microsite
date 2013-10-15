@@ -10,7 +10,7 @@
             <div class="menu-options">
                 <ul style="display: none;">
                     @foreach ($products as $menu)
-                        <li><a href="{{ URL::route('index.product', array('id' => $menu->id)) }}">{{ $menu->name }}</a></li>
+                        <li><a href="{{ URL::route('index.product', array('id' => $menu->id)) }}">{{ Util::clean($menu->name) }}</a></li>
                     @endforeach
                 </ul>
             </div>
@@ -53,7 +53,7 @@
                     </div>
                 </div>
                 <div class="col-md-8">
-                    <h1>{{ $product->name }}</h1>
+                    <h1>{{ Util::clean($product->name) }}</h1>
                     @if ($product->videoUrl)
                         <a class="video" data-toggle="modal" data-target="#video" href="#video"><img src="{{ URL::asset('img/video-icon.png') }}" /></a>
                     @endif

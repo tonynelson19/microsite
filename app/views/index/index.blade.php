@@ -14,10 +14,12 @@
                 @foreach ($sections as $section)
                     <li>
                         <a href="{{ URL::route('index.section', array('id' => $section->id)) }}">
-                            <span class="image">
+                            <div class="image">
                                 <img src="{{ $section->imageUrl }}" />
-                            </span>
-                            <span class="name">{{ $section->name }}</span>
+                            </div>
+                            <div class="name">
+                                <span>{{ $section->name }}</span>
+                            </div>
                         </a>
                     </li>
                 @endforeach
