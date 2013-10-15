@@ -346,10 +346,6 @@ class AdminController extends BaseController
             'name'  => 'required',
         );
 
-        if (!$product->id) {
-            $rules['image'] = 'required';
-        }
-
         /** @var Illuminate\Validation\Validator $validator */
         $validator = Validator::make(Input::all(), $rules);
 

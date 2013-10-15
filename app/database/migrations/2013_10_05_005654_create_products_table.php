@@ -17,9 +17,9 @@ class CreateProductsTable extends Migration {
 			$table->increments('id');
             $table->integer('categoryId');
             $table->string('name', 200);
-            $table->string('imageUrl', 2000);
+            $table->string('imageUrl', 2000)->nullable();
             $table->string('videoUrl', 200)->nullable();
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->string('status', 50)->nullable();
             $table->integer('order');
 		});
