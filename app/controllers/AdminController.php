@@ -4,7 +4,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 class AdminController extends BaseController
 {
     public function indexAction()
-	{
+    {
         if (Request::isMethod('post')) {
 
             /** @var Illuminate\Validation\Validator $validator */
