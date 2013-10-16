@@ -11,6 +11,15 @@ body {
     background: url('../img/white-carbon-fiber.png') repeat-x center top transparent;
 }
 
+.footer {
+    position: fixed;
+    bottom: 0;
+    height: 36px;
+    width: 100%;
+    background: url('../img/black-header.png') repeat-x center top transparent;
+    z-index: -1;
+}
+
 .logo {
     background: url('../img/red-header.png') repeat-x center 60px transparent;
     text-align: center;

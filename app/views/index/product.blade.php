@@ -75,5 +75,7 @@
             </div>
         </div>
     @endif
+    <div class="footer">
+    </div>
 
 @stop
