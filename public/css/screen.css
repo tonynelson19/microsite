@@ -273,6 +273,7 @@ body {
 .container.product .carousel-control .icon-next {
     font-size: 50px;
     margin-top: -50px;
+    color: #111;
 }
 
 .container.product .carousel-caption {
@@ -324,16 +325,13 @@ body {
     display: inline;
 }
 
-.container.product .made-in-usa {
-    position: relative;
-    top: -12px;
-    margin-left: 12px;
-}
-
+.container.product .made-in-usa,
 .container.product .video {
+    display: inline-block;
+    font-size: 42px;
+    margin-left: 12px;
+    bottom: 3px;
     position: relative;
-    top: -12px;
-    left: 12px;
 }
 
 .container.product h2 {
