@@ -11,13 +11,17 @@ body {
     background: url('../img/white-carbon-fiber.png') repeat-x center top transparent;
 }
 
+.wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto 0px;
+    padding: 0 0 12px;
+    background: url('../img/black-header.png') repeat-x center bottom transparent;
+}
+
 .footer {
-    position: fixed;
-    bottom: 0;
-    height: 36px;
-    width: 100%;
-    background: url('../img/black-header.png') repeat-x center top transparent;
-    z-index: -1;
+    display: none;
 }
 
 .logo {
@@ -331,8 +335,8 @@ body {
 }
 
 .container.product .description {
-    font-size: 16px;
-    padding: 20px 0;
+    font-size: 18px;
+    padding: 20px 0 50px;
 }
 
 .container.login {
