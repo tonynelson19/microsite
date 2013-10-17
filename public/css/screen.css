@@ -269,6 +269,12 @@ body {
     max-height: 550px;
 }
 
+.container.product .carousel-control .icon-prev,
+.container.product .carousel-control .icon-next {
+    font-size: 50px;
+    margin-top: -50px;
+}
+
 .container.product .carousel-caption {
     bottom: -10px;
     left: 0;
@@ -282,6 +288,8 @@ body {
 
 .container.product .carousel-indicators {
     bottom: 10px;
+    width: 100%;
+    margin-left: -50%;
 }
 
 .container.product .carousel-indicators li {

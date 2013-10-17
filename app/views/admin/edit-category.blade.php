@@ -11,6 +11,7 @@
     <div class="container">
         <h1>{{ Util::clean($category->name) }}</h1>
         {{ View::make('admin.form-category', array('category' => $category, 'products' => $products)) }}
+        <a class="btn btn-danger" href="{{ URL::route('admin.delete-category', array('id' => $category->id)) }}" data-confirm="Are you sure you want to delete this category?">Delete</a>
     </div>
 
 @stop

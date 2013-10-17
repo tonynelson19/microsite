@@ -55,7 +55,4 @@
         </div>
     @endif
     {{ Former::actions()->primary_submit('Submit') }}
-    @if ($section->id)
-        <a class="btn btn-danger" href="{{ URL::route('admin.delete-section', array('id' => $section->id)) }}" data-confirm="Are you sure you want to delete this section?">Delete</a>
-    @endif
 {{ Former::close() }}
