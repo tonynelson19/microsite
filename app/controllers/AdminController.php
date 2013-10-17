@@ -155,11 +155,14 @@ class AdminController extends BaseController
     {
         $product = new Product();
 
+        /** @var Category $category */
         $category = Category::findOrFail($id);
 
         $section = $category->section;
 
         $result = $this->processProductForm($category, $product);
+
+        $images = $product->images()->ordered()->get();
 
         if ($result) {
             return Redirect::route('admin.edit-product', array('id' => $product->id));
@@ -169,6 +172,7 @@ class AdminController extends BaseController
             'section'  => $section,
             'category' => $category,
             'product'  => $product,
+            'images'   => $images,
         ));
     }
 
@@ -206,59 +210,6 @@ class AdminController extends BaseController
         $product->delete();
 
         return Redirect::route('admin.edit-category', array('id' => $category->id));
-    }
-
-    public function saveProductImagesAction($id)
-    {
-        /** @var Product $product */
-        $product = Product::findOrFail($id);
-
-        $images = Input::get('images');
-
-        if (is_array($images)) {
-
-            foreach ($images as $key => $value) {
-
-                /** @var Image $image */
-                $image = Image::find($key);
-
-                if (array_key_exists('delete', $value)) {
-
-                    $image->delete();
-
-                } else {
-
-                    $image->order    = (int) $value['order'];
-                    $image->imageUrl = $value['imageUrl'];
-                    $image->caption  = $value['caption'];
-                    $image->status   = $value['status'];
-
-                    $image->save();
-
-                }
-
-            }
-
-        }
-
-        foreach (Input::get('new') as $value) {
-
-            if ($value['imageUrl']) {
-
-                $image = new Image();
-
-                $image->order    = (int) $value['order'];
-                $image->imageUrl = $value['imageUrl'];
-                $image->caption  = $value['caption'];
-                $image->status   = $value['status'];
-
-                $product->images()->save($image);
-
-            }
-
-        }
-
-        return Redirect::route('admin.edit-product', array('id' => $product->id));
     }
 
     /**
@@ -376,6 +327,51 @@ class AdminController extends BaseController
             }
 
             $category->products()->save($product);
+
+            $images = Input::get('images');
+
+            if (is_array($images)) {
+
+                foreach ($images as $key => $value) {
+
+                    /** @var Image $image */
+                    $image = Image::find($key);
+
+                    if (array_key_exists('delete', $value)) {
+
+                        $image->delete();
+
+                    } else {
+
+                        $image->order    = (int) $value['order'];
+                        $image->imageUrl = $value['imageUrl'];
+                        $image->caption  = $value['caption'];
+                        $image->status   = $value['status'];
+
+                        $image->save();
+
+                    }
+
+                }
+
+            }
+
+            foreach (Input::get('new') as $value) {
+
+                if ($value['imageUrl']) {
+
+                    $image = new Image();
+
+                    $image->order    = (int) $value['order'];
+                    $image->imageUrl = $value['imageUrl'];
+                    $image->caption  = $value['caption'];
+                    $image->status   = $value['status'];
+
+                    $product->images()->save($image);
+
+                }
+
+            }
 
         }
 

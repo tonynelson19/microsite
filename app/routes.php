@@ -96,9 +96,3 @@ Route::any('/admin/product/delete/{id}', array(
     'uses'   => 'AdminController@deleteProductAction',
     'before' => 'auth',
 ));
-
-Route::any('/admin/product/images/{id}', array(
-    'as'     => 'admin.save-product-images',
-    'uses'   => 'AdminController@saveProductImagesAction',
-    'before' => 'auth',
-));

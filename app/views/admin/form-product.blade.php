@@ -22,5 +22,49 @@
     @endif
     {{ Former::textarea('description')->value($product->description)->rows(8)->class('js-editor') }}
     {{ Former::select('status')->value($product->status)->options(Product::$statuses) }}
+
+    <div class="form-group">
+        <label for="name" class="col-lg-2 control-label">Images</label>
+        <div class="col-lg-10 controls">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th width="1%">Order</th>
+                        <th>Image</th>
+                        <th>URL</th>
+                        <th>Caption</th>
+                        <th>Status</th>
+                        <th width="1%">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $order = 1; ?>
+                    @foreach ($images as $image)
+                        <tr>
+                            <td>{{ Form::text('images[' . $image->id . '][order]', $order, array('size' => 3)) }}</td>
+                            <td><div class="thumbnail"><img src="{{ $image->imageUrl }}" /></div></td>
+                            <td>{{ Form::text('images[' . $image->id . '][imageUrl]', $image->imageUrl) }}</td>
+                            <td>{{ Form::text('images[' . $image->id . '][caption]', $image->caption) }}</td>
+                            <td>{{ Form::select('images[' . $image->id . '][status]', Image::$statuses, $image->status) }}</td>
+                            <td>{{ Form::checkbox('images[' . $image->id . '][delete]') }}</td>
+                        </tr>
+                        <?php $order++; ?>
+                    @endforeach
+                    @for ($i = 1; $i <= 5; $i++)
+                        <tr>
+                            <td>{{ Form::text('new[' . $i . '][order]', $order, array('size' => 3)) }}</td>
+                            <td>&nbsp;</td>
+                            <td>{{ Form::text('new[' . $i . '][imageUrl]') }}</td>
+                            <td>{{ Form::text('new[' . $i . '][caption]') }}</td>
+                            <td>{{ Form::select('new[' . $i . '][status]', Image::$statuses) }}</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <?php $order++; ?>
+                    @endfor
+                </tbody>
+            </table>
+        </div>
+    </div>
+
     {{ Former::actions()->primary_submit('Submit') }}
 {{ Former::close() }}

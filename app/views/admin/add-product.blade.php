@@ -11,7 +11,7 @@
 
     <div class="container">
         <h1>New Product</h1>
-        {{ View::make('admin.form-product', array('product' => $product)) }}
+        {{ View::make('admin.form-product', array('product' => $product, 'images' => $images)) }}
     </div>
 
 @stop

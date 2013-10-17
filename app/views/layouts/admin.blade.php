@@ -11,7 +11,7 @@
         {{ HTML::script('plugins/ckeditor/adapters/jquery.js') }}
         {{ HTML::script('js/admin.js') }}
     </head>
-    <body>
+    <body class="admin">
         @if (Auth::user())
             <a href="{{ URL::route('admin.logout') }}" class="logout">Logout</a>
         @endif

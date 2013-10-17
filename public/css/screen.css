@@ -349,6 +349,10 @@ body {
     line-height: 1;
 }
 
+body.admin .container {
+    padding-bottom: 40px;
+}
+
 .table .thumbnail {
     height: 46px;
     width: 46px;
