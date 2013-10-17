@@ -21,6 +21,7 @@
                     <th>Status</th>
                     <th>Image</th>
                     <th>Images</th>
+                    <th>Videos</th>
                     <th>&nbsp;</th>
                 </tr>
             </thead>
@@ -32,6 +33,7 @@
                         <td>{{ $product->status }}</td>
                         <td><div class="thumbnail"><img src="{{ $product->imageUrl }}" /></div></td>
                         <td>{{ count($product->images) }}</td>
+                        <td>{{ count($product->videos) }}</td>
                         <td>
                             <ul>
                                 <li><a href="{{ URL::route('admin.edit-product', array('id' => $product->id)) }}">Edit</a></li>
@@ -42,7 +44,7 @@
                 @endforeach
                 @if (count($products) == 0)
                     <tr>
-                        <td colspan="6">None</td>
+                        <td colspan="7">None</td>
                     </tr>
                 @endif
             </tbody>

@@ -162,29 +162,30 @@ class AdminController extends BaseController
 
         $result = $this->processProductForm($category, $product);
 
-        $images = $product->images()->ordered()->get();
-
         if ($result) {
             return Redirect::route('admin.edit-product', array('id' => $product->id));
         }
+
+        $images = array();
+        $videos = array();
 
         return View::make('admin.add-product', array(
             'section'  => $section,
             'category' => $category,
             'product'  => $product,
             'images'   => $images,
+            'videos'   => $videos,
         ));
     }
 
     public function editProductAction($id)
     {
+        /** @var Product $product */
         $product = Product::findOrFail($id);
 
         $category = $product->category;
 
         $section = $category->section;
-
-        $images = $product->images()->ordered()->get();
 
         $result = $this->processProductForm($category, $product);
 
@@ -192,11 +193,15 @@ class AdminController extends BaseController
             return Redirect::route('admin.edit-product', array('id' => $product->id));
         }
 
+        $images = $product->images()->ordered()->get();
+        $videos = $product->videos()->ordered()->get();
+
         return View::make('admin.edit-product', array(
             'section'  => $section,
             'category' => $category,
             'product'  => $product,
             'images'   => $images,
+            'videos'   => $videos,
         ));
     }
 
@@ -307,19 +312,6 @@ class AdminController extends BaseController
             $product->description = Input::get('description');
             $product->status      = Input::get('status');
 
-            $videoUrl = Input::get('videoUrl');
-
-            if ($videoUrl != '') {
-                $videoId = Product::getVideoId($videoUrl);
-                if ($videoId) {
-                    $videoUrl = 'http://youtu.be/' . $videoId;
-                } else {
-                    $videoUrl = '';
-                }
-            }
-
-            $product->videoUrl = $videoUrl;
-
             if (Input::hasFile('imageUpload')) {
                 $product->imageUrl = $this->processUpload(Input::file('imageUpload'));
             } else {
@@ -356,7 +348,7 @@ class AdminController extends BaseController
 
             }
 
-            foreach (Input::get('new') as $value) {
+            foreach (Input::get('newImages') as $value) {
 
                 if ($value['imageUrl']) {
 
@@ -368,6 +360,55 @@ class AdminController extends BaseController
                     $image->status   = $value['status'];
 
                     $product->images()->save($image);
+
+                }
+
+            }
+
+            $videos = Input::get('videos');
+
+            if (is_array($videos)) {
+
+                foreach ($videos as $key => $value) {
+
+                    /** @var Video $video */
+                    $video = Video::find($key);
+
+                    if (array_key_exists('delete', $value)) {
+
+                        $video->delete();
+
+                    } else {
+
+                        $videoUrl = Video::getYouTubeUrl($value['videoUrl']);
+
+                        $video->order    = (int) $value['order'];
+                        $video->videoUrl = $videoUrl;
+                        $video->caption  = $value['caption'];
+                        $video->status   = $value['status'];
+
+                        $video->save();
+
+                    }
+
+                }
+
+            }
+
+            foreach (Input::get('newVideos') as $value) {
+
+                $videoUrl = Video::getYouTubeUrl($value['videoUrl']);
+
+                if ($videoUrl) {
+
+                    $video = new Video();
+
+                    $video->order    = (int) $value['order'];
+                    $video->videoUrl = $videoUrl;
+                    $video->caption  = $value['caption'];
+                    $video->status   = $value['status'];
+
+                    $product->videos()->save($video);
 
                 }
 

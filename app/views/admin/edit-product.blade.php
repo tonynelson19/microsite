@@ -11,7 +11,7 @@
 
     <div class="container">
         <h1>{{ Util::clean($product->name) }}</h1>
-        {{ View::make('admin.form-product', array('product' => $product, 'images' => $images)) }}
+        {{ View::make('admin.form-product', array('product' => $product, 'images' => $images, 'videos' => $videos)) }}
         <a class="btn btn-danger" href="{{ URL::route('admin.delete-product', array('id' => $product->id)) }}" data-confirm="Are you sure you want to delete this product?">Delete</a>
     </div>
 

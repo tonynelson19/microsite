@@ -2,6 +2,24 @@ $(function() {
 
     APP = {
 
+        Carousels: {
+
+            init: function() {
+
+                var carousels = $('.carousel');
+
+                carousels.hammer().on('swipeleft', function() {
+                    $(this).carousel('next');
+                });
+
+                carousels.hammer().on('swiperight', function() {
+                    $(this).carousel('prev');
+                });
+
+            }
+
+        },
+
         Links: {
 
             init: function() {
@@ -90,6 +108,7 @@ $(function() {
 
     }
 
+    APP.Carousels.init();
     APP.Links.init();
     APP.Menu.init();
     APP.Modals.init();

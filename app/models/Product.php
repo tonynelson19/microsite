@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
  * @property Category $category
  * @property string $name
  * @property string $imageUrl
- * @property string $videoUrl
  * @property string $description
  * @property string $status
  * @property int $order
@@ -54,6 +53,16 @@ class Product extends Eloquent
     }
 
     /**
+     * Get the videos associated with the product
+     *
+     * @return Illuminate\Database\Eloquent\Builder
+     */
+    public function videos()
+    {
+        return $this->hasMany('Video', 'productId');
+    }
+
+    /**
      * Only active records
      *
      * @param Illuminate\Database\Eloquent\Builder $query
@@ -73,20 +82,5 @@ class Product extends Eloquent
     public function scopeOrdered($query)
     {
         return $query->orderBy('order', 'asc');
-    }
-
-    /**
-     * Get the video ID
-     *
-     * @param string $url
-     * @return string|null
-     */
-    public static function getVideoId($url)
-    {
-        if (preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $url, $match)) {
-            return $match[1];
-        }
-
-        return null;
     }
 }

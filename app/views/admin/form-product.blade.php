@@ -11,18 +11,8 @@
             </div>
         </div>
     @endif
-    {{ Former::text('videoUrl')->label('Video URL')->value($product->videoUrl) }}
-    @if ($product->videoUrl)
-        <div class="form-group">
-            <label for="name" class="col-lg-2 control-label">&nbsp</label>
-            <div class="col-lg-10 controls">
-                <iframe width="420" height="315" src="//www.youtube.com/embed/{{ Product::getVideoId($product->videoUrl) }}" frameborder="0" allowfullscreen></iframe>
-            </div>
-        </div>
-    @endif
     {{ Former::textarea('description')->value($product->description)->rows(8)->class('js-editor') }}
     {{ Former::select('status')->value($product->status)->options(Product::$statuses) }}
-
     <div class="form-group">
         <label for="name" class="col-lg-2 control-label">Images</label>
         <div class="col-lg-10 controls">
@@ -30,10 +20,10 @@
                 <thead>
                     <tr>
                         <th width="1%">Order</th>
-                        <th>Image</th>
-                        <th>URL</th>
-                        <th>Caption</th>
-                        <th>Status</th>
+                        <th width="20%">Image</th>
+                        <th width="35%">URL</th>
+                        <th width="35%">Caption</th>
+                        <th width="8%">Status</th>
                         <th width="1%">Delete</th>
                     </tr>
                 </thead>
@@ -52,11 +42,53 @@
                     @endforeach
                     @for ($i = 1; $i <= 5; $i++)
                         <tr>
-                            <td>{{ Form::text('new[' . $i . '][order]', $order, array('size' => 3)) }}</td>
+                            <td>{{ Form::text('newImages[' . $i . '][order]', $order, array('size' => 3)) }}</td>
                             <td>&nbsp;</td>
-                            <td>{{ Form::text('new[' . $i . '][imageUrl]') }}</td>
-                            <td>{{ Form::text('new[' . $i . '][caption]') }}</td>
-                            <td>{{ Form::select('new[' . $i . '][status]', Image::$statuses) }}</td>
+                            <td>{{ Form::text('newImages[' . $i . '][imageUrl]') }}</td>
+                            <td>{{ Form::text('newImages[' . $i . '][caption]') }}</td>
+                            <td>{{ Form::select('newImages[' . $i . '][status]', Image::$statuses) }}</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <?php $order++; ?>
+                    @endfor
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="name" class="col-lg-2 control-label">Videos</label>
+        <div class="col-lg-10 controls">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th width="1%">Order</th>
+                        <th width="20%">Video</th>
+                        <th width="35%">URL</th>
+                        <th width="35%">Caption</th>
+                        <th width="8%">Status</th>
+                        <th width="1%">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $order = 1; ?>
+                    @foreach ($videos as $video)
+                        <tr>
+                            <td>{{ Form::text('videos[' . $video->id . '][order]', $order, array('size' => 3)) }}</td>
+                            <td><iframe width="120" height="90" src="{{ Video::getYouTubeEmbedUrl($video->videoUrl) }}?wmode=transparent&html5=1" frameborder="0" allowfullscreen></iframe></td>
+                            <td>{{ Form::text('videos[' . $video->id . '][videoUrl]', $video->videoUrl) }}</td>
+                            <td>{{ Form::text('videos[' . $video->id . '][caption]', $video->caption) }}</td>
+                            <td>{{ Form::select('videos[' . $video->id . '][status]', Video::$statuses, $video->status) }}</td>
+                            <td>{{ Form::checkbox('videos[' . $video->id . '][delete]') }}</td>
+                        </tr>
+                        <?php $order++; ?>
+                    @endforeach
+                    @for ($i = 1; $i <= 5; $i++)
+                        <tr>
+                            <td>{{ Form::text('newVideos[' . $i . '][order]', $order, array('size' => 3)) }}</td>
+                            <td>&nbsp;</td>
+                            <td>{{ Form::text('newVideos[' . $i . '][videoUrl]') }}</td>
+                            <td>{{ Form::text('newVideos[' . $i . '][caption]') }}</td>
+                            <td>{{ Form::select('newVideos[' . $i . '][status]', Video::$statuses) }}</td>
                             <td>&nbsp;</td>
                         </tr>
                         <?php $order++; ?>

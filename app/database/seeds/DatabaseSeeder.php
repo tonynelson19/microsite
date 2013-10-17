@@ -51,7 +51,7 @@ class DatabaseSeeder extends Seeder {
                     for ($l = 1; $l <= 3; $l++) {
 
                         /** @var Image $image */
-                        $image = Image::create(array(
+                        Image::create(array(
                             'productId' => $product->id,
                             'imageUrl'  => 'http://placekitten.com/350/550',
                             'caption'   => 'Image ' . $i . '.' . $j . '.' . $k . '.' . $l,

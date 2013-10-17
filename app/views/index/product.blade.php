@@ -54,7 +54,7 @@
                 </div>
                 <div class="col-md-8">
                     <h1>{{ Util::clean($product->name) }}</h1>
-                    @if ($product->videoUrl)
+                    @if (count($product->videos))
                         <a class="video" data-toggle="modal" data-target="#video" href="#video"><img src="{{ URL::asset('img/video-icon.png') }}" /></a>
                     @endif
                     <div class="description">
@@ -64,12 +64,12 @@
             </div>
         </div>
     </div>
-    @if ($product->videoUrl)
+    @if (count($product->videos))
         <div class="modal fade" id="video" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-body">
-                        <iframe width="560" height="415" src="//www.youtube.com/embed/{{ Product::getVideoId($product->videoUrl) }}?wmode=transparent&html5=1" frameborder="0" allowfullscreen></iframe>
+                        <iframe width="560" height="415" src="{{ Video::getYouTubeEmbedUrl($product->videos[0]->videoUrl) }}?wmode=transparent&html5=1" frameborder="0" allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
