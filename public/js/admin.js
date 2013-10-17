@@ -28,7 +28,7 @@ $(function() {
                     var button = $(this);
                     button.css('margin-left', '6px');
 
-                    button.siblings('.form-horizontal').find('.btn-primary').after(button);
+                    button.prev().find('.btn-primary').after(button);
                 });
 
             }

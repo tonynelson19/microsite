@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
  * Category model
  *
  * @property int $id
+ * @property Products[] $products
  * @property int $sectionId
  * @property Section $section
  * @property string $name

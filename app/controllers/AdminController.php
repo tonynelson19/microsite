@@ -58,6 +58,7 @@ class AdminController extends BaseController
     public function addSectionAction()
     {
         $section = new Section();
+        $section->order = count(Section::all()) + 1;
 
         $result = $this->processSectionForm($section);
 
@@ -65,8 +66,11 @@ class AdminController extends BaseController
             return Redirect::route('admin.edit-section', array('id' => $section->id));
         }
 
+        $categories = array();
+
         return View::make('admin.add-section', array(
-            'section' => $section,
+            'section'    => $section,
+            'categories' => $categories,
         ));
     }
 
@@ -75,13 +79,13 @@ class AdminController extends BaseController
         /** @var Section $section */
         $section = Section::findOrFail($id);
 
-        $categories = $section->categories()->ordered()->get();
-
         $result = $this->processSectionForm($section);
 
         if ($result) {
             return Redirect::route('admin.edit-section', array('id' => $section->id));
         }
+
+        $categories = $section->categories()->ordered()->get();
 
         return View::make('admin.edit-section', array(
             'section'    => $section,
@@ -101,9 +105,11 @@ class AdminController extends BaseController
 
     public function addCategoryAction($id)
     {
+        /** @var Section $section */
         $section = Section::findOrFail($id);
 
         $category = new Category();
+        $category->order = count($section->categories) + 1;
 
         $result = $this->processCategoryForm($section, $category);
 
@@ -111,9 +117,12 @@ class AdminController extends BaseController
             return Redirect::route('admin.edit-category', array('id' => $category->id));
         }
 
+        $products = array();
+
         return View::make('admin.add-category', array(
             'section'  => $section,
             'category' => $category,
+            'products' => $products,
         ));
     }
 
@@ -126,11 +135,11 @@ class AdminController extends BaseController
 
         $result = $this->processCategoryForm($section, $category);
 
-        $products = $category->products()->ordered()->get();
-
         if ($result) {
             return Redirect::route('admin.edit-category', array('id' => $category->id));
         }
+
+        $products = $category->products()->ordered()->get();
 
         return View::make('admin.edit-category', array(
             'section'  => $section,
@@ -153,10 +162,11 @@ class AdminController extends BaseController
 
     public function addProductAction($id)
     {
-        $product = new Product();
-
         /** @var Category $category */
         $category = Category::findOrFail($id);
+
+        $product = new Product();
+        $product->order = count($category->products) + 1;
 
         $section = $category->section;
 
@@ -247,6 +257,21 @@ class AdminController extends BaseController
 
             $section->save();
 
+            $categories = Input::get('categories');
+
+            if (is_array($categories)) {
+
+                foreach ($categories as $key => $value) {
+
+                    /** @var Category $category */
+                    $category = Category::find($key);
+                    $category->order = (int) $value;
+                    $category->save();
+
+                }
+
+            }
+
         }
 
         Former::withRules($validator->getRules());
@@ -279,6 +304,21 @@ class AdminController extends BaseController
             $category->status = Input::get('status');
 
             $section->categories()->save($category);
+
+            $products = Input::get('products');
+
+            if (is_array($products)) {
+
+                foreach ($products as $key => $value) {
+
+                    /** @var Product $product */
+                    $product = Product::find($key);
+                    $product->order = (int) $value;
+                    $product->save();
+
+                }
+
+            }
 
         }
 

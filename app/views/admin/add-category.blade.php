@@ -10,7 +10,7 @@
 
     <div class="container">
         <h1>New Category</h1>
-        {{ View::make('admin.form-category', array('category' => $category)) }}
+        {{ View::make('admin.form-category', array('category' => $category, 'products' => $products)) }}
     </div>
 
 @stop

@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
  * Section model
  *
  * @property int $id
+ * @property Category[] $categories
  * @property string $name
  * @property string $imageUrl
  * @property string $status

@@ -9,7 +9,7 @@
 
     <div class="container">
         <h1>New Section</h1>
-        {{ View::make('admin.form-section', array('section' => $section)) }}
+        {{ View::make('admin.form-section', array('section' => $section, 'categories' => $categories)) }}
     </div>
 
 @stop
