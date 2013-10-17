@@ -351,6 +351,7 @@ class AdminController extends BaseController
             $product->name        = Input::get('name');
             $product->description = Input::get('description');
             $product->status      = Input::get('status');
+            $product->madeInUsa   = (bool) Input::get('madeInUsa');
 
             if (Input::hasFile('imageUpload')) {
                 $product->imageUrl = $this->processUpload(Input::file('imageUpload'));

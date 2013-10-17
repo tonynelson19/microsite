@@ -12,6 +12,7 @@
         </div>
     @endif
     {{ Former::textarea('description')->value($product->description)->rows(8)->class('js-editor') }}
+    {{ Former::checkbox('madeInUsa')->label('Made in USA')->check($product->madeInUsa) }}
     {{ Former::select('status')->value($product->status)->options(Product::$statuses) }}
     <div class="form-group">
         <label for="name" class="col-lg-2 control-label">Images</label>

@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
  * @property string $imageUrl
  * @property string $description
  * @property string $status
+ * @property bool $madeInUsa
  * @property int $order
  */
 class Product extends Eloquent
@@ -82,5 +83,16 @@ class Product extends Eloquent
     public function scopeOrdered($query)
     {
         return $query->orderBy('order', 'asc');
+    }
+
+    /**
+     * Get made in USA
+     *
+     * @param string $value
+     * @return bool
+     */
+    public function getMadeInUsaAttribute($value)
+    {
+        return (bool) $value;
     }
 }

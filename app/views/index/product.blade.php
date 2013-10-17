@@ -54,6 +54,9 @@
                 </div>
                 <div class="col-md-8">
                     <h1>{{ Util::clean($product->name) }}</h1>
+                    @if ($product->madeInUsa)
+                        <span class="made-in-usa"><img src="http://placekitten.com/30/30" alt="Made in USA" /></span>
+                    @endif
                     @if (count($product->videos))
                         <a class="video" data-toggle="modal" data-target="#video" href="#video"><img src="{{ URL::asset('img/video-icon.png') }}" /></a>
                     @endif

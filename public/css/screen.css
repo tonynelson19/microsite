@@ -312,6 +312,12 @@ body {
     display: inline;
 }
 
+.container.product .made-in-usa {
+    position: relative;
+    top: -12px;
+    margin-left: 12px;
+}
+
 .container.product .video {
     position: relative;
     top: -12px;
@@ -397,9 +403,16 @@ body.admin .container {
     max-width: 116px;
 }
 
-.form-control[type="file"] {
+.form-control[type="file"],
+.form-control[type="checkbox"] {
+    display: inline;
     border-color: transparent;
     -webkit-box-shadow: none;
        -mox-box-shadow: none;
             box-shadow: none;
+}
+
+.form-control[type="checkbox"] {
+    width: 30px;
+    height: 30px;
 }
