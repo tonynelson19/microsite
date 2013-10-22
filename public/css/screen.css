@@ -159,30 +159,10 @@ body {
     margin-top: 40px;
 }
 
-.container.section .categories li {
+.container.section .categories .category {
     list-style-type: none;
     margin-bottom: 30px;
     text-align: center;
-}
-
-.container.section .categories li {
-}
-
-.container.section .categories-2 .category {
-    width: 49%;
-    float: left;
-    margin-left: 20px;
-}
-
-.container.section .categories-3 .category {
-    width: 32%;
-    float: left;
-    margin-left: 20px;
-}
-
-.container.section .categories-2 .category-1,
-.container.section .categories-3 .category-1{
-    margin-left: 0;
 }
 
 .container.section .categories h2 {
@@ -197,20 +177,20 @@ body {
     font-weight: bold;
 }
 
-.container.section .categories li ul {
+.container.section .categories ul {
     background-color: #eee;
     padding: 0;
     padding-top: 15px;
     padding-bottom: 15px;
 }
 
-.container.section .categories li ul li {
+.container.section .categories ul li {
     list-style-type: none;
     margin: 10px;
     display: inline-block;
 }
 
-.container.section .categories li ul li a {
+.container.section .categories ul li a {
     width: 254px;
     height: 72px;
     display: table-cell;
@@ -220,11 +200,11 @@ body {
     padding: 5px;
 }
 
-.container.section .categories li ul li a:hover {
+.container.section .categories ul li a:hover {
     text-decoration: none;
 }
 
-.container.section .categories li ul li a .image {
+.container.section .categories ul li a .image {
     width: 62px;
     height: 62px;
     display: table-cell;
@@ -233,12 +213,12 @@ body {
     margin-right: 2px;
 }
 
-.container.section .categories li ul li a .image img {
+.container.section .categories ul li a .image img {
     max-width: 62px;
     max-height: 62px;
 }
 
-.container.section .categories li ul li a .name {
+.container.section .categories ul li a .name {
     display: table-cell;
     vertical-align: middle;
     font-weight: bold;

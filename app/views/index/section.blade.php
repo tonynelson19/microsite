@@ -18,25 +18,25 @@
     </div>
     <div class="content">
         <div class="container section">
-            <ul class="categories categories-{{ count($categories) }}">
-                @foreach ($categories as $index => $category)
-                    <li class="category category-{{ ($index + 1) }}">
+            <div class="row categories">
+                @foreach ($categories as $category)
+                    <div class="category col-md-{{ (12 / count($categories)) }}">
                         <h2>{{ $category->name }}</h2>
                         <ul>
                             @foreach ($products[$category->id] as $product)
-                            <li>
-                                <a href="{{ URL::route('index.product', array('id' => $product->id)) }}">
-                                    <span class="image">
-                                        <img src="{{ $product->imageUrl }}" />
-                                    </span>
-                                    <span class="name">{{ $product->name }}</span>
-                                </a>
-                            </li>
+                                <li>
+                                    <a href="{{ URL::route('index.product', array('id' => $product->id)) }}">
+                                        <span class="image">
+                                            <img src="{{ $product->imageUrl }}" />
+                                        </span>
+                                        <span class="name">{{ $product->name }}</span>
+                                    </a>
+                                </li>
                             @endforeach
                         </ul>
-                    </li>
+                    </div>
                 @endforeach
-            </ul>
+            </div>
         </div>
     </div>
 
