@@ -20,6 +20,36 @@ $(function() {
 
         },
 
+        Categories: {
+
+            init: function() {
+
+                var self = this;
+                var categories = $('.category ul');
+
+                if (categories.length) {
+
+                    var maxHeight = 0;
+                    categories.each(function() {
+                        var height = $(this).innerHeight();
+
+                        if (height > maxHeight) {
+                            maxHeight = height;
+                        }
+                    });
+
+                    categories.css('height', maxHeight);
+
+                }
+
+                $(document).on('page:reloaded', function() {
+                    self.init();
+                });
+
+            }
+
+        },
+
         Links: {
 
             init: function() {
@@ -46,6 +76,7 @@ $(function() {
 
                     wrapper.load(url + ' ' + target, function() {
                         $(window).scrollTop(0, 0);
+                        $(document).trigger('page:reloaded');
                     });
                 });
 
@@ -108,6 +139,7 @@ $(function() {
 
     }
 
+    // APP.Categories.init();
     APP.Carousels.init();
     APP.Links.init();
     APP.Menu.init();

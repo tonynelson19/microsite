@@ -11,6 +11,10 @@ body {
     background: url('../img/white-carbon-fiber.png') repeat-x center top transparent;
 }
 
+.wrapper {
+    min-height: 100%;
+}
+
 .wrap {
     min-height: 100%;
     height: auto !important;
@@ -108,7 +112,14 @@ body {
 .container.index .sections li {
     list-style-type: none;
     display: inline-block;
-    margin: 0 30px 30px 0;
+    margin: 0 0 30px 0;
+
+}
+
+@media (min-width: 768px) {
+    .container.index .sections li {
+        margin: 0 15px 30px;
+    }
 }
 
 .container.index .sections a {
