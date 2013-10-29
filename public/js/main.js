@@ -55,10 +55,8 @@ $(function() {
             init: function() {
 
                 var self = this;
-                var target = '.wrapper';
-                var wrapper = $(target);
 
-                wrapper.on('click', 'a', function(e) {
+                $('.wrapper').on('click', 'a', function(e) {
                     var link = $(this);
 
                     if (link.hasClass('external')) {
@@ -74,9 +72,12 @@ $(function() {
 
                     e.preventDefault();
 
-                    wrapper.load(url + ' ' + target, function() {
+                    $.get(url, function(response) {
+                        var content = $(response).filter('.wrapper').html();
+                        $('.wrapper').html(content);
                         $(window).scrollTop(0, 0);
                         $(document).trigger('page:reloaded');
+
                     });
                 });
 
