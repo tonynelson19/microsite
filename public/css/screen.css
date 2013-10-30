@@ -309,12 +309,20 @@ body {
     color: #111;
 }
 
+.container.product .carousel-control.left {
+    text-align: left;
+}
+
+.container.product .carousel-control.right {
+    text-align: right;
+}
+
 .container.product .carousel-control .icon-prev {
-    margin-left: -20px;
+    margin-left: -25px;
 }
 
 .container.product .carousel-control .icon-next {
-    margin-left: -10px;
+    margin-left: -5px;
 }
 
 .container.product .carousel-caption {
