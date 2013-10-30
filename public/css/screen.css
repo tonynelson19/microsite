@@ -318,11 +318,11 @@ body {
 }
 
 .container.product .carousel-control .icon-prev {
-    margin-left: -25px;
+    margin-left: -30px;
 }
 
 .container.product .carousel-control .icon-next {
-    margin-left: -5px;
+    margin-left: 0;
 }
 
 .container.product .carousel-caption {
