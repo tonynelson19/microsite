@@ -6,7 +6,12 @@ $(function() {
 
             init: function() {
 
+                var self = this;
                 var carousels = $('.carousel');
+
+                carousels.carousel({
+                    interval: 4000
+                });
 
                 carousels.hammer().on('swipeleft', function() {
                     $(this).carousel('next');
@@ -15,32 +20,6 @@ $(function() {
                 carousels.hammer().on('swiperight', function() {
                     $(this).carousel('prev');
                 });
-
-            }
-
-        },
-
-        Categories: {
-
-            init: function() {
-
-                var self = this;
-                var categories = $('.category ul');
-
-                if (categories.length) {
-
-                    var maxHeight = 0;
-                    categories.each(function() {
-                        var height = $(this).innerHeight();
-
-                        if (height > maxHeight) {
-                            maxHeight = height;
-                        }
-                    });
-
-                    categories.css('height', maxHeight);
-
-                }
 
                 $(document).on('page:reloaded', function() {
                     self.init();
@@ -72,12 +51,16 @@ $(function() {
 
                     e.preventDefault();
 
-                    $.get(url, function(response) {
-                        var content = $(response).filter('.wrapper').html();
-                        $('.wrapper').html(content);
-                        $(window).scrollTop(0, 0);
-                        $(document).trigger('page:reloaded');
-
+                    $.ajax({
+                        url: url,
+                        success: function(response) {
+                            var content = $('<div>' + response + '</div>').find('.wrapper').html();
+                            console.log(content);
+                            $('.wrapper').html(content);
+                            $(window).scrollTop(0, 0);
+                            $(document).trigger('page:reloaded');
+                            console.log('here');
+                        }
                     });
                 });
 
@@ -140,7 +123,6 @@ $(function() {
 
     }
 
-    // APP.Categories.init();
     APP.Carousels.init();
     APP.Links.init();
     APP.Menu.init();

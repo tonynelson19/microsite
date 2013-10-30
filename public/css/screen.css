@@ -294,10 +294,11 @@ body {
     display: table-cell;
     vertical-align: middle;
     text-align: center;
+    padding: 0 10px;
 }
 
 .container.product .carousel .item .image img {
-    max-width: 350px;
+    max-width: 330px;
     max-height: 550px;
 }
 
@@ -306,6 +307,14 @@ body {
     font-size: 50px;
     margin-top: -50px;
     color: #111;
+}
+
+.container.product .carousel-control .icon-prev {
+    margin-left: -30px;
+}
+
+.container.product .carousel-control .icon-next {
+    margin-left: 0;
 }
 
 .container.product .carousel-caption {
