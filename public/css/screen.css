@@ -431,6 +431,44 @@ body {
     color: #666;
 }
 
+.modal-body .thumbnails {
+    height: 160px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+
+.modal-body .thumbnails ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.modal-body .thumbnails li {
+    display: inline-block;
+    padding: 5px;
+    text-align: center;
+    width: 130px;
+    white-space: normal;
+    vertical-align: top;
+}
+
+.modal-body .thumbnails a {
+    color: #fff;
+}
+
+.modal-body .thumbnails img {
+    border: 1px solid #000;
+}
+
+.modal-body .thumbnails .active img {
+    border: 1px solid #666;
+}
+
+.modal-body .thumbnails span {
+    display: inline-block;
+    padding: 5px 0;
+}
+
 body.admin .container {
     padding-bottom: 40px;
 }

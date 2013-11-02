@@ -71,10 +71,6 @@ class Video extends Eloquent
      */
     public static function getYouTubeUrl($url)
     {
-        if ($url == '') {
-            return null;
-        }
-
         $id = self::getYouTubeId($url);
 
         if ($id) {
@@ -92,10 +88,6 @@ class Video extends Eloquent
      */
     public static function getYouTubeEmbedUrl($url)
     {
-        if ($url == '') {
-            return null;
-        }
-
         $id = self::getYouTubeId($url);
 
         if ($id) {
@@ -106,6 +98,24 @@ class Video extends Eloquent
     }
 
     /**
+     * Get the YouTube thumbnail URL
+     *
+     * @param string $url
+     * @return null|string
+     */
+    public static function getYouTubeThumbnailUrl($url)
+    {
+        $id = self::getYouTubeId($url);
+
+        if ($id) {
+            return 'http://img.youtube.com/vi/' . $id . '/default.jpg';
+        }
+
+        return null;
+
+    }
+
+    /**
      * Get the YouTube ID
      *
      * @param string $url
@@ -113,6 +123,10 @@ class Video extends Eloquent
      */
     public static function getYouTubeId($url)
     {
+        if ($url == '') {
+            return null;
+        }
+
         if (preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $url, $match)) {
             return $match[1];
         }

@@ -77,6 +77,20 @@
                     <div class="modal-body">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         <iframe width="560" height="415" src="{{ Video::getYouTubeEmbedUrl($product->videos[0]->videoUrl) }}?wmode=transparent&html5=1" frameborder="0" allowfullscreen></iframe>
+                        @if (count($product->videos) > 1)
+                            <div class="thumbnails">
+                                <ul>
+                                    @foreach ($product->videos as $index => $video)
+                                        <li>
+                                            <a href="#thumbnail-{{ $index + 1 }}" data-url="{{ Video::getYouTubeEmbedUrl($video->videoUrl) }}?wmode=transparent&html5=1">
+                                                <img src="{{ Video::getYouTubeThumbnailUrl($video->videoUrl) }}" /><br />
+                                                <span>{{ $video->caption }}</span>
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

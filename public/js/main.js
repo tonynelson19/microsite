@@ -7,6 +7,11 @@ $(function() {
             init: function() {
 
                 var self = this;
+
+                $(document).on('page:reloaded', function() {
+                    self.init();
+                });
+
                 var carousels = $('.carousel');
 
                 carousels.carousel({
@@ -19,10 +24,6 @@ $(function() {
 
                 carousels.hammer().on('swiperight', function() {
                     $(this).carousel('prev');
-                });
-
-                $(document).on('page:reloaded', function() {
-                    self.init();
                 });
 
             }
@@ -44,6 +45,8 @@ $(function() {
 
                     var url = link.attr('href');
                     var hash = self.parseUrl(url).hash;
+
+                    console.log(hash);
 
                     if (hash !== '') {
                         return;
@@ -119,6 +122,40 @@ $(function() {
                 iframe.attr('src', iframe.attr('src'));
             }
 
+        },
+
+        Thumbnails: {
+
+            init: function() {
+
+                var self = this;
+
+                $(document).on('page:reloaded', function() {
+                    self.init();
+                });
+
+                var thumbnails = $('.thumbnails');
+
+                if (thumbnails.length) {
+
+                    thumbnails.find('a:first').addClass('active');
+
+                    var links = thumbnails.find('a');
+                    var iframe = $('.modal iframe');
+
+                    links.on('click', function(e) {
+                        e.preventDefault();
+                        var link = $(this);
+                        console.log(link.data('url'));
+                        iframe.attr('src', link.data('url'));
+                        links.removeClass('active');
+                        link.addClass('active');
+                    });
+
+                }
+
+            }
+
         }
 
     }
@@ -127,5 +164,6 @@ $(function() {
     APP.Links.init();
     APP.Menu.init();
     APP.Modals.init();
+    APP.Thumbnails.init();
 
 });
