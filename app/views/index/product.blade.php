@@ -58,7 +58,7 @@
                         @if ($product->madeInUsa)
                             <span class="made-in-usa"><img src="{{ URL::asset('img/usa.png') }}" title="Made in USA" alt="Made in USA" /></span>
                         @endif
-                        @if (count($product->videos))
+                        @if (count($videos))
                             <a class="video" data-toggle="modal" data-target="#video" href="#video"><img src="{{ URL::asset('img/video-icon.png') }}" /></a>
                         @endif
                         <div class="description">
@@ -70,17 +70,17 @@
         </div>
     </div>
     <div class="footer"></div>
-    @if (count($product->videos))
+    @if (count($videos))
         <div class="modal fade" id="video" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-body">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <iframe width="560" height="415" src="{{ Video::getYouTubeEmbedUrl($product->videos[0]->videoUrl) }}?wmode=transparent&html5=1" frameborder="0" allowfullscreen></iframe>
-                        @if (count($product->videos) > 1)
+                        <iframe width="560" height="415" src="{{ Video::getYouTubeEmbedUrl($videos[0]->videoUrl) }}?wmode=transparent&html5=1" frameborder="0" allowfullscreen></iframe>
+                        @if (count($videos) > 1)
                             <div class="thumbnails">
                                 <ul>
-                                    @foreach ($product->videos as $index => $video)
+                                    @foreach ($videos as $index => $video)
                                         <li>
                                             <a href="#thumbnail-{{ $index + 1 }}" data-url="{{ Video::getYouTubeEmbedUrl($video->videoUrl) }}?wmode=transparent&html5=1">
                                                 <img src="{{ Video::getYouTubeThumbnailUrl($video->videoUrl) }}" /><br />

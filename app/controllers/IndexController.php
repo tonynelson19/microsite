@@ -39,11 +39,14 @@ class IndexController extends BaseController
 
         $images = $product->images()->active()->ordered()->get();
 
+        $videos = $product->videos()->active()->ordered()->get();
+
         $products = $product->category->products()->active()->ordered()->get();
 
         return View::make('index.product', array(
             'product'  => $product,
             'images'   => $images,
+            'videos'   => $videos,
             'products' => $products,
         ));
     }
