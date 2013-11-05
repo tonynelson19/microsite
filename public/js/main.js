@@ -46,8 +46,6 @@ $(function() {
                     var url = link.attr('href');
                     var hash = self.parseUrl(url).hash;
 
-                    console.log(hash);
-
                     if (hash !== '') {
                         return;
                     }
@@ -58,11 +56,9 @@ $(function() {
                         url: url,
                         success: function(response) {
                             var content = $('<div>' + response + '</div>').find('.wrapper').html();
-                            console.log(content);
                             $('.wrapper').html(content);
                             $(window).scrollTop(0, 0);
                             $(document).trigger('page:reloaded');
-                            console.log('here');
                         }
                     });
                 });
@@ -146,7 +142,6 @@ $(function() {
                     links.on('click', function(e) {
                         e.preventDefault();
                         var link = $(this);
-                        console.log(link.data('url'));
                         iframe.attr('src', link.data('url'));
                         links.removeClass('active');
                         link.addClass('active');
