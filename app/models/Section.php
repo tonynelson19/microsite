@@ -20,6 +20,9 @@ class Section extends Eloquent
     const STATUS_ACTIVE   = 'Active';
     const STATUS_INACTIVE = 'Inactive';
 
+    const IMAGE_WIDTH  = 224;
+    const IMAGE_HEIGHT = 130;
+
     /**
      * Statuses
      *

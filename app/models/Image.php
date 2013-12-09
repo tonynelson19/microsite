@@ -21,6 +21,9 @@ class Image extends Eloquent
     const STATUS_ACTIVE   = 'Active';
     const STATUS_INACTIVE = 'Inactive';
 
+    const IMAGE_WIDTH  = 330;
+    const IMAGE_HEIGHT = 550;
+
     /**
      * Statuses
      *

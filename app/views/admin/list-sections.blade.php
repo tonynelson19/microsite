@@ -8,6 +8,7 @@
 
     <div class="container">
         <h1>Sections</h1>
+        <a href="{{ URL::route('admin.download-images') }} ">Download Images</a>
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>

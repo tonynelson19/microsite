@@ -227,6 +227,31 @@ class AdminController extends BaseController
         return Redirect::route('admin.edit-category', array('id' => $category->id));
     }
 
+    public function downloadImagesAction()
+    {
+        ini_set('memory_limit', '2G');
+
+        /** @var Section $section */
+        foreach (Section::all() as $section) {
+            $section->imageUrl = $this->processImage($section->imageUrl, Section::IMAGE_WIDTH, Section::IMAGE_HEIGHT);
+            $section->save();
+        }
+
+        /** @var Product $product */
+        foreach (Product::all() as $product) {
+            $product->imageUrl = $this->processImage($product->imageUrl, Product::IMAGE_WIDTH, Product::IMAGE_HEIGHT);
+            $product->save();
+        }
+
+        /** @var Image $image */
+        foreach (Image::all() as $image) {
+            $image->imageUrl = $this->processImage($image->imageUrl, Image::IMAGE_WIDTH, Image::IMAGE_HEIGHT);
+            $image->save();
+        }
+
+        return Redirect::route('admin.list-sections');
+    }
+
     /**
      * Process the section form
      *
@@ -250,9 +275,9 @@ class AdminController extends BaseController
             $section->status = Input::get('status');
 
             if (Input::hasFile('imageUpload')) {
-                $section->imageUrl = $this->processUpload(Input::file('imageUpload'));
+                $section->imageUrl = $this->processUpload(Input::file('imageUpload'), Section::IMAGE_WIDTH, Section::IMAGE_HEIGHT);
             } else {
-                $section->imageUrl = Input::get('imageUrl');
+                $section->imageUrl = $this->processImage(Input::get('imageUrl'), Section::IMAGE_WIDTH, Section::IMAGE_HEIGHT);
             }
 
             $section->save();
@@ -354,9 +379,9 @@ class AdminController extends BaseController
             $product->madeInUsa   = (bool) Input::get('madeInUsa');
 
             if (Input::hasFile('imageUpload')) {
-                $product->imageUrl = $this->processUpload(Input::file('imageUpload'));
+                $product->imageUrl = $this->processUpload(Input::file('imageUpload'), Product::IMAGE_WIDTH, Product::IMAGE_HEIGHT);
             } else {
-                $product->imageUrl = Input::get('imageUrl');
+                $product->imageUrl = $this->processImage(Input::get('imageUrl'), Product::IMAGE_WIDTH, Product::IMAGE_HEIGHT);
             }
 
             $category->products()->save($product);
@@ -377,7 +402,7 @@ class AdminController extends BaseController
                     } else {
 
                         $image->order    = (int) $value['order'];
-                        $image->imageUrl = $value['imageUrl'];
+                        $image->imageUrl = $this->processImage($value['imageUrl'], Image::IMAGE_WIDTH, Image::IMAGE_HEIGHT);
                         $image->caption  = $value['caption'];
                         $image->status   = $value['status'];
 
@@ -396,7 +421,7 @@ class AdminController extends BaseController
                     $image = new Image();
 
                     $image->order    = (int) $value['order'];
-                    $image->imageUrl = $value['imageUrl'];
+                    $image->imageUrl = $this->processImage($value['imageUrl'], Image::IMAGE_WIDTH, Image::IMAGE_HEIGHT);
                     $image->caption  = $value['caption'];
                     $image->status   = $value['status'];
 
@@ -467,37 +492,36 @@ class AdminController extends BaseController
      * Process an update
      *
      * @param UploadedFile $file
+     * @param int $maxWidth
+     * @param int $maxHeight
      * @return string
      */
-    protected function processUpload(UploadedFile $file)
+    protected function processUpload(UploadedFile $file, $maxWidth, $maxHeight)
     {
         $root = public_path();
-        $path = $this->generateUploadPath($root, $file);
+        $path = $this->generatePath($file->getClientOriginalName(), $file->getClientOriginalExtension());
         $info = pathinfo($root . $path);
-        $url  = URL::to($path);
 
         $file->move($info['dirname'], $info['basename']);
 
-        return $url;
+        return $this->downloadImage(URL::to($path), $maxWidth, $maxHeight);
     }
 
     /**
-     * Generate a path for an uploaded file
+     * Generate a unique file path
      *
-     * @param string $root
-     * @param UploadedFile $file
+     * @param string $name
+     * @param string $extension
      * @return string
      */
-    protected function generateUploadPath($root, UploadedFile $file)
+    protected function generatePath($name, $extension)
     {
-        $parts     = explode('.', $file->getClientOriginalName());
-        $name      = $parts[0];
-        $extension = $file->getClientOriginalExtension();
-        $path      = '/uploads/' . $name . '.' . $extension;
-        $version   = 0;
+        $name    = $this->slugify(basename($name, '.' . pathinfo($name, PATHINFO_EXTENSION)));
+        $root    = public_path();
+        $path    = strtolower('/uploads/' . $name . '.' . $extension);
+        $version = 0;
 
         while (true) {
-
             if (!file_exists($root . $path)) {
                 break;
             }
@@ -507,5 +531,150 @@ class AdminController extends BaseController
         }
 
         return $path;
+    }
+
+    /**
+     * Process an image
+     *
+     * @param string $url
+     * @param int $width
+     * @param int $height
+     * @return string
+     */
+    protected function processImage($url, $width, $height)
+    {
+        if ($this->isRemoteImage($url)) {
+            return $this->downloadImage($url, $width, $height);
+        }
+        return $url;
+    }
+
+    /**
+     * Check if a image is remote
+     *
+     * @param string $url
+     * @return bool
+     */
+    protected function isRemoteImage($url)
+    {
+        $url = trim(strtolower($url));
+
+        if ($url == '') {
+            return false;
+        }
+
+        $local = URL::to('/');
+
+        if (substr($url, 0, strlen($local)) === $local) {
+            return false;
+        }
+
+        if (in_array($this->getExtension($url), array('jpg', 'png'))) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Download an image
+     *
+     * @param string $url
+     * @param int $maxWidth
+     * @param int $maxHeight
+     * @return string
+     */
+    protected function downloadImage($url, $maxWidth, $maxHeight)
+    {
+        $extension    = $this->getExtension($url);
+        $sourceSize   = getimagesize($url);
+        $sourceWidth  = $sourceSize[0];
+        $sourceHeight = $sourceSize[1];
+        $sourceRatio  = $sourceWidth / $sourceHeight;
+        $maxRatio     = $maxWidth / $maxHeight;
+
+        if ($sourceWidth <= $maxWidth && $sourceHeight <= $maxHeight) {
+            $width  = $sourceWidth;
+            $height = $sourceHeight;
+        } elseif ($maxRatio > $sourceRatio) {
+            $width  = (int) ($maxHeight * $sourceRatio);
+            $height = $maxHeight;
+        } else {
+            $width  = $maxWidth;
+            $height = (int) ($maxWidth / $sourceRatio);
+        }
+
+        if ($extension == 'png') {
+            $source = imagecreatefrompng($url);
+        } else {
+            $source = imagecreatefromjpeg($url);
+        }
+
+        $image = imagecreatetruecolor($width, $height);
+        imagefill($image, 0, 0, imagecolorallocate($image, 255, 255, 255)); // fill the background with white
+        imagecopyresampled($image, $source, 0, 0, 0, 0, $width, $height, $sourceWidth, $sourceHeight);
+
+        $path = $this->generatePath($url, $extension);
+        $file = public_path() . $path;
+
+        if ($extension == 'png') {
+            imagepng($image, $file, 9);
+        } else {
+            imagejpeg($image, $file, 100);
+        }
+
+        imagedestroy($image);
+        imagedestroy($source);
+
+        return URL::to($path);
+    }
+
+    /**
+     * Get the extension for a URL
+     *
+     * @param string $url
+     * @return string|null
+     */
+    protected function getExtension($url)
+    {
+        $url = trim(strtolower($url));
+
+        if ($url == '') {
+            return null;
+        }
+
+        return pathinfo(parse_url($url, PHP_URL_PATH), PATHINFO_EXTENSION);
+    }
+
+    /**
+     * Slugify text
+     *
+     * @param string $text
+     * @return string
+     */
+    public function slugify($text)
+    {
+        $text = strtolower(trim($text));
+
+        // replace non letter or digits by -
+        $text = preg_replace('~[^\\pL\d]+~u', '-', $text);
+
+        // trim
+        $text = trim($text, '-');
+
+        // transliterate
+        $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+
+        // lowercase
+        $text = strtolower($text);
+
+        // remove unwanted characters
+        $text = preg_replace('~[^-\w]+~', '', $text);
+
+        if (empty($text)) {
+            return 'n-a';
+        }
+
+        return $text;
     }
 }

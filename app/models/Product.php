@@ -23,6 +23,9 @@ class Product extends Eloquent
     const STATUS_ACTIVE   = 'Active';
     const STATUS_INACTIVE = 'Inactive';
 
+    const IMAGE_WIDTH  = 62;
+    const IMAGE_HEIGHT = 62;
+
     /**
      * Statuses
      *
