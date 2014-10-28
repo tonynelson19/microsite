@@ -1,5 +1,4 @@
 <?php
-use Illuminate\Database\Eloquent\Model as Eloquent;
 
 /**
  * Image model
@@ -12,7 +11,7 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
  * @property string $status
  * @property int $order
  */
-class Image extends Eloquent
+class Image extends Illuminate\Database\Eloquent\Model
 {
 	protected $table = 'images';
 
@@ -37,7 +36,7 @@ class Image extends Eloquent
     /**
      * Get the product associated with the image
      *
-     * @return Illuminate\Database\Eloquent\Builder
+     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function product()
     {
@@ -47,8 +46,8 @@ class Image extends Eloquent
     /**
      * Only active records
      *
-     * @param Illuminate\Database\Eloquent\Builder $query
-     * @return Illuminate\Database\Eloquent\Builder
+     * @param Illuminate\Database\Query\Builder $query
+     * @return Illuminate\Database\Query\Builder
      */
     public function scopeActive($query)
     {
@@ -58,8 +57,8 @@ class Image extends Eloquent
     /**
      * Order the records
      *
-     * @param Illuminate\Database\Eloquent\Builder $query
-     * @return Illuminate\Database\Eloquent\Builder
+     * @param Illuminate\Database\Query\Builder $query
+     * @return Illuminate\Database\Query\Builder
      */
     public function scopeOrdered($query)
     {

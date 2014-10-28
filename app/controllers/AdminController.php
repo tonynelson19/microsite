@@ -611,7 +611,9 @@ class AdminController extends BaseController
         }
 
         $image = imagecreatetruecolor($width, $height);
-        imagefill($image, 0, 0, imagecolorallocate($image, 255, 255, 255)); // fill the background with white
+        imagealphablending($image, false);
+        imagesavealpha($image, true);
+        imagefill($image, 0, 0, imagecolorallocatealpha($image, 255, 255, 255, 127)); // fill the background with white
         imagecopyresampled($image, $source, 0, 0, 0, 0, $width, $height, $sourceWidth, $sourceHeight);
 
         $path = $this->generatePath($url, $extension);

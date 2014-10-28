@@ -1,5 +1,4 @@
 <?php
-use Illuminate\Database\Eloquent\Model as Eloquent;
 
 /**
  * Product model
@@ -14,7 +13,7 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
  * @property bool $madeInUsa
  * @property int $order
  */
-class Product extends Eloquent
+class Product extends Illuminate\Database\Eloquent\Model
 {
 	protected $table = 'products';
 
@@ -39,7 +38,7 @@ class Product extends Eloquent
     /**
      * Get the category associated with the product
      *
-     * @return Illuminate\Database\Eloquent\Builder
+     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function category()
     {
@@ -49,7 +48,7 @@ class Product extends Eloquent
     /**
      * Get the images associated with the product
      *
-     * @return Illuminate\Database\Eloquent\Builder
+     * @return Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function images()
     {
@@ -59,7 +58,7 @@ class Product extends Eloquent
     /**
      * Get the videos associated with the product
      *
-     * @return Illuminate\Database\Eloquent\Builder
+     * @return Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function videos()
     {
@@ -69,8 +68,8 @@ class Product extends Eloquent
     /**
      * Only active records
      *
-     * @param Illuminate\Database\Eloquent\Builder $query
-     * @return Illuminate\Database\Eloquent\Builder
+     * @param Illuminate\Database\Query\Builder $query
+     * @return Illuminate\Database\Query\Builder
      */
     public function scopeActive($query)
     {
@@ -80,8 +79,8 @@ class Product extends Eloquent
     /**
      * Order the records
      *
-     * @param Illuminate\Database\Eloquent\Builder $query
-     * @return Illuminate\Database\Eloquent\Builder
+     * @param Illuminate\Database\Query\Builder $query
+     * @return Illuminate\Database\Query\Builder
      */
     public function scopeOrdered($query)
     {

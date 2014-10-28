@@ -1,5 +1,4 @@
 <?php
-use Illuminate\Database\Eloquent\Model as Eloquent;
 
 /**
  * User model
@@ -9,7 +8,7 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
  * @property string $password
  * @property string $salt
  */
-class User extends Eloquent implements Illuminate\Auth\UserInterface
+class User extends Illuminate\Database\Eloquent\Model implements Illuminate\Auth\UserInterface
 {
 	protected $table = 'users';
 

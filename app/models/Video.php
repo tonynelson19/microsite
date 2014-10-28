@@ -1,5 +1,4 @@
 <?php
-use Illuminate\Database\Eloquent\Model as Eloquent;
 
 /**
  * Video model
@@ -12,7 +11,7 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
  * @property string $status
  * @property int $order
  */
-class Video extends Eloquent
+class Video extends Illuminate\Database\Eloquent\Model
 {
 	protected $table = 'videos';
 
@@ -34,7 +33,7 @@ class Video extends Eloquent
     /**
      * Get the product associated with the video
      *
-     * @return Illuminate\Database\Eloquent\Builder
+     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function product()
     {
@@ -44,8 +43,8 @@ class Video extends Eloquent
     /**
      * Only active records
      *
-     * @param Illuminate\Database\Eloquent\Builder $query
-     * @return Illuminate\Database\Eloquent\Builder
+     * @param Illuminate\Database\Query\Builder $query
+     * @return Illuminate\Database\Query\Builder
      */
     public function scopeActive($query)
     {
@@ -55,8 +54,8 @@ class Video extends Eloquent
     /**
      * Order the records
      *
-     * @param Illuminate\Database\Eloquent\Builder $query
-     * @return Illuminate\Database\Eloquent\Builder
+     * @param Illuminate\Database\Query\Builder $query
+     * @return Illuminate\Database\Query\Builder
      */
     public function scopeOrdered($query)
     {

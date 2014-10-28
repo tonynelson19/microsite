@@ -1,5 +1,4 @@
 <?php
-use Illuminate\Database\Eloquent\Model as Eloquent;
 
 /**
  * Section model
@@ -11,7 +10,7 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
  * @property string $status
  * @property int $order
  */
-class Section extends Eloquent
+class Section extends Illuminate\Database\Eloquent\Model
 {
 	protected $table = 'sections';
 
@@ -36,7 +35,7 @@ class Section extends Eloquent
     /**
      * Get the categories associated with the section
      *
-     * @return Illuminate\Database\Eloquent\Builder
+     * @return Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function categories()
     {
@@ -46,8 +45,8 @@ class Section extends Eloquent
     /**
      * Only active records
      *
-     * @param Illuminate\Database\Eloquent\Builder $query
-     * @return Illuminate\Database\Eloquent\Builder
+     * @param Illuminate\Database\Query\Builder $query
+     * @return Illuminate\Database\Query\Builder
      */
     public function scopeActive($query)
     {
@@ -57,8 +56,8 @@ class Section extends Eloquent
     /**
      * Order the records
      *
-     * @param Illuminate\Database\Eloquent\Builder $query
-     * @return Illuminate\Database\Eloquent\Builder
+     * @param Illuminate\Database\Query\Builder $query
+     * @return Illuminate\Database\Query\Builder
      */
     public function scopeOrdered($query)
     {

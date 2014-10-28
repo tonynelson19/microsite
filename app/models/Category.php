@@ -1,18 +1,17 @@
 <?php
-use Illuminate\Database\Eloquent\Model as Eloquent;
 
 /**
  * Category model
  *
  * @property int $id
- * @property Products[] $products
+ * @property Product[] $products
  * @property int $sectionId
  * @property Section $section
  * @property string $name
  * @property string $status
  * @property int $order
  */
-class Category extends Eloquent
+class Category extends Illuminate\Database\Eloquent\Model
 {
 	protected $table = 'categories';
 
@@ -34,7 +33,7 @@ class Category extends Eloquent
     /**
      * Get the section associated with the category
      *
-     * @return Illuminate\Database\Eloquent\Builder
+     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function section()
     {
@@ -44,7 +43,7 @@ class Category extends Eloquent
     /**
      * Get the products associated with the category
      *
-     * @return Illuminate\Database\Eloquent\Builder
+     * @return Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function products()
     {
@@ -54,8 +53,8 @@ class Category extends Eloquent
     /**
      * Only active records
      *
-     * @param Illuminate\Database\Eloquent\Builder $query
-     * @return Illuminate\Database\Eloquent\Builder
+     * @param Illuminate\Database\Query\Builder $query
+     * @return Illuminate\Database\Query\Builder
      */
     public function scopeActive($query)
     {
@@ -65,8 +64,8 @@ class Category extends Eloquent
     /**
      * Order the records
      *
-     * @param Illuminate\Database\Eloquent\Builder $query
-     * @return Illuminate\Database\Eloquent\Builder
+     * @param Illuminate\Database\Query\Builder $query
+     * @return Illuminate\Database\Query\Builder
      */
     public function scopeOrdered($query)
     {
