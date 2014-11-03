@@ -1,6 +1,6 @@
 $(function() {
 
-    APP = {
+    var APP = {
 
         Carousels: {
 
@@ -9,22 +9,34 @@ $(function() {
                 var self = this;
 
                 $(document).on('page:reloaded', function() {
-                    self.init();
+                    self.bind();
                 });
 
-                var carousels = $('.carousel');
+                self.bind();
 
-                carousels.carousel({
-                    interval: 4000
-                });
+            },
 
-                carousels.hammer().on('swipeleft', function() {
-                    $(this).carousel('next');
-                });
+            bind: function() {
 
-                carousels.hammer().on('swiperight', function() {
-                    $(this).carousel('prev');
-                });
+                var carousels = $('.carousel').not('.carousel-initialized');
+
+                if (carousels.length > 0) {
+
+                    carousels.carousel({
+                        interval: 4000
+                    });
+
+                    carousels.hammer().on('swipeleft', function() {
+                        $(this).carousel('next');
+                    });
+
+                    carousels.hammer().on('swiperight', function() {
+                        $(this).carousel('prev');
+                    });
+
+                    carousels.addClass('carousel-initialized');
+
+                }
 
             }
 
@@ -127,12 +139,18 @@ $(function() {
                 var self = this;
 
                 $(document).on('page:reloaded', function() {
-                    self.init();
+                    self.bind();
                 });
 
-                var thumbnails = $('.thumbnails');
+                self.bind();
 
-                if (thumbnails.length) {
+            },
+
+            bind: function() {
+
+                var thumbnails = $('.thumbnails').not('.thumbnails-initialized');
+
+                if (thumbnails.length > 0) {
 
                     thumbnails.find('a:first').addClass('active');
 
@@ -147,13 +165,15 @@ $(function() {
                         link.addClass('active');
                     });
 
+                    thumbnails.addClass('thumbnails-initialized');
+
                 }
 
             }
 
         }
 
-    }
+    };
 
     APP.Carousels.init();
     APP.Links.init();
